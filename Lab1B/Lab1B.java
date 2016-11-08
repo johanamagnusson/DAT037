@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Lab1A {
+public class Lab1B {
 	
 	public static void main(String[] args) throws FileNotFoundException {
 
@@ -17,12 +17,7 @@ public class Lab1A {
 			input.add(scan.nextInt());
 		}
 
-		int[] intArray = new int[input.size()];
-		for (int i = 0; i < intArray.length; i++) {
-			intArray[i] = input.get(i).intValue();
-		}
-
-		MyIntSet sortedIntArray = new MySortedIntArray(intArray, element);
+		MySet sortedIntArray = new MySortedArray<Integer>(input.toArray(new Integer[input.size()]), element);
 	}
 
 }
