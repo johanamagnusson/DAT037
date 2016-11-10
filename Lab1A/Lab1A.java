@@ -4,10 +4,10 @@ import java.util.*;
 public class Lab1A {
 	
 	public static void main(String[] args) throws FileNotFoundException {
-
+            System.out.println("Hej");
 		int element = Integer.parseInt(args[0]);
 		String filename = args[1];
-
+                
 		File file = new File(filename);
 		Scanner scan = new Scanner(file);
 
