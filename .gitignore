@@ -13,3 +13,10 @@ hs_err_pid*
 
 # MAC-bullshit
 .DS_Store
+
+# Javadoc
+*.html
+*.css
+*.js
+*.php
+package-list
