@@ -1,12 +1,11 @@
 /**
 * The class MySortedArray implements binary search to conclude if an input value
-* is present in a given sorted array. 
+* of the comparable but otherwise arbitrary datatype E is present in a given sorted array.
 *
 * @author  Andreas Magnusson, Carl Smedstad
 * @version 1.0
 * @since   2016-11-10
 */
-
 public class MySortedArray<E extends Comparable<? super E>> implements MySet<E> {
 
     E[] array;
