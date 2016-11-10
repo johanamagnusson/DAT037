@@ -15,6 +15,7 @@ public class Lab1B {
      * The main method that reads a file and uses the class MySortedArray to find out
      * if the given integer is present in it.
      * @param args String of two arguments, first one the integer and the last one the filepath.
+     * @throws FileNotFoundException if file name does not exists in directory.
      */
     public static void main(String[] args) throws FileNotFoundException {
 
