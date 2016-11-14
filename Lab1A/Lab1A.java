@@ -18,25 +18,27 @@ public class Lab1A {
      * @throws FileNotFoundException if file name does not exist in directory.
      */
      public static void main(String[] args) throws FileNotFoundException {
-	 int element = Integer.parseInt(args[0]);
-	 String filename = args[1];
-                
-	 File file = new File(filename);
-	 Scanner scan = new Scanner(file);
+		 
+		 int element = Integer.parseInt(args[0]);
+		 String filename = args[1];
+	 
+		 File file = new File(filename);
+		 Scanner scan = new Scanner(file);
+	 
+		 ArrayList<Integer> input = new ArrayList<Integer>();
+	 
+		 while (scan.hasNextInt()) {
+			 input.add(scan.nextInt());
+		 }
+	 
+		 // Converting the arrayList input to a plain array of primitive integers. 
+		 int[] intArray = new int[input.size()];
+		 for (int i = 0; i < intArray.length; i++) {
+			 intArray[i] = input.get(i).intValue();
+		 }
 
-	 ArrayList<Integer> input = new ArrayList<Integer>();
-
-	 while (scan.hasNextInt()) {
-	     input.add(scan.nextInt());
+		 MyIntSet sortedIntArray = new MySortedIntArray(intArray);
+		 System.out.println(sortedIntArray.member(element));
 	 }
-
-         // Converting the arrayList input to a plain array of primitive integers. 
-	 int[] intArray = new int[input.size()];
-         for (int i = 0; i < intArray.length; i++) {
-	     intArray[i] = input.get(i).intValue();
-	 }
-
-	 MyIntSet sortedIntArray = new MySortedIntArray(intArray, element);
-    }
 
 }

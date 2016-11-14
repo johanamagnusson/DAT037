@@ -13,6 +13,7 @@ hs_err_pid*
 
 # MAC-bullshit
 .DS_Store
+*.swp
 
 # Javadoc
 *.html
