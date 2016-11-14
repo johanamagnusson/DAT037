@@ -36,7 +36,8 @@ public class Lab1A {
 	     intArray[i] = input.get(i).intValue();
 	 }
 
-	 MyIntSet sortedIntArray = new MySortedIntArray(intArray, element);
+	 MyIntSet sortedIntArray = new MySortedIntArray(intArray);
+     System.out.println(sortedIntArray.member(element));
     }
 
 }

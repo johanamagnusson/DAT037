@@ -31,8 +31,9 @@ public class Lab1BString {
             input.add(scan.next());
 	    }
 
-	    MySet sortedStringArray = new MySortedArray<String>
-            (input.toArray(new String[input.size()]), element);
-	}
+	    MySet<String> sortedStringArray = new MySortedArray<String>
+            (input.toArray(new String[input.size()]));
 
+        System.out.println(sortedStringArray.member(element));
+	}
 }
