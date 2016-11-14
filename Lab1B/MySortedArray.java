@@ -5,6 +5,7 @@
 * @author  Andreas Magnusson, Carl Smedstad
 * @version 1.0
 * @since   2016-11-10
+* @param <E> the type of the elements in the array being searched.
 */
 public class MySortedArray<E extends Comparable<? super E>> implements MySet<E> {
 
@@ -14,10 +15,9 @@ public class MySortedArray<E extends Comparable<? super E>> implements MySet<E> 
      * Constructor for MySortedArray.
      * @param a array of datatype E
      * @param element element of datatype E
-     */  
-    public MySortedArray(E[] a, E element) {
+     */
+    public MySortedArray(E[] a) {
         array = a;
-	System.out.println(member(element));
     }
 
     /**

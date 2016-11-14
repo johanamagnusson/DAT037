@@ -31,8 +31,10 @@ public class Lab1B {
 	    input.add(scan.nextInt());
 	}
 
-	MySet sortedIntArray = new MySortedArray<Integer>
-            (input.toArray(new Integer[input.size()]), element);
+	MySet<Integer> sortedIntArray = new MySortedArray<Integer>
+            (input.toArray(new Integer[input.size()]));
+
+	System.out.println(sortedIntArray.member(element));
 	}
 
 }
