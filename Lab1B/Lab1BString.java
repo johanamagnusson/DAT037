@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * The Lab1B class finds out if an integer is present in a given text file.
+ * The Lab1BString class finds out if an element is present in a given text file.
  * Program needs two arguments, an integer and a filepath in that order.
  * 
  * @author  Andreas Magnusson, Carl Smedstad
@@ -31,8 +31,10 @@ public class Lab1BString {
             input.add(scan.next());
 	    }
 
-	    MySet sortedStringArray = new MySortedArray<String>
-            (input.toArray(new String[input.size()]), element);
+	    MySet<String> sortedStringArray = new MySortedArray<String>
+            (input.toArray(new String[input.size()]));
+
+		System.out.println(sortedStringArray.member(element));
 	}
 
 }

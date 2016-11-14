@@ -33,7 +33,7 @@ public class MySortedArray<E extends Comparable<? super E>> implements MySet<E> 
 
 	while (start <= end) {
 
-	    int mid = (start + end) / 2;
+	    int mid = start + ((end - start) / 2);
 
 	    if (element.compareTo(array[mid]) < 0) {
 	        end = mid - 1;

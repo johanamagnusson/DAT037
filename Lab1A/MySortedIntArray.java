@@ -8,9 +8,9 @@
 */
 
 public class MySortedIntArray implements MyIntSet {
-
+	
     int[] array;
-
+	
     /**
      * Constructor for MySortedIntArray.
      * @param a array of primitive integers
@@ -18,7 +18,7 @@ public class MySortedIntArray implements MyIntSet {
      */  
     public MySortedIntArray(int[] a, int element) {
         array = a;
-	System.out.println(member(element));
+		System.out.println(member(element));
     }
 
     /**
@@ -29,21 +29,21 @@ public class MySortedIntArray implements MyIntSet {
     @Override
     public boolean member(int element) {
 
-        int start = 0;
-	int end = array.length - 1;
+		int start = 0;
+		int end = array.length - 1;
 
-	while (start <= end) {
-
-	    int mid = (start + end) / 2;
-
-	    if (element < array[mid]) {
-	        end = mid - 1;
-	    }
-	    else if (element > array[mid]) {
+		while (start <= end) {
+			
+			int mid = start + ((end - start) / 2);
+			
+			if (element < array[mid]) {
+				end = mid - 1;
+			}
+			else if (element > array[mid]) {
                 start = mid + 1;
-	    } else {
-	        return true;
-	    }
+			} else {
+				return true;
+			}
         }
         return false;
     }
