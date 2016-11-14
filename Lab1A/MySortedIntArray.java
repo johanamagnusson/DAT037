@@ -14,7 +14,6 @@ public class MySortedIntArray implements MyIntSet {
     /**
      * Constructor for MySortedIntArray.
      * @param a array of primitive integers
-     * @param element element of datatyp int
      */  
     public MySortedIntArray(int[] a) {
         array = a;

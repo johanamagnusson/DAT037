@@ -14,7 +14,6 @@ public class MySortedArray<E extends Comparable<? super E>> implements MySet<E> 
     /**
      * Constructor for MySortedArray.
      * @param a array of datatype E
-     * @param element element of datatype E
      */
     public MySortedArray(E[] a) {
         array = a;
