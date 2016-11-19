@@ -39,6 +39,10 @@ public class PriorityQueue<E extends Comparable<? super E>> {
         return i != 0;
     }
 
+    private bool hasLeftChild(int i) {
+        return leftChildIndex(i) <= size - 1;
+    }
+
     /*
     private int parentIndex(int i) {
         return i/2;
@@ -66,6 +70,15 @@ public class PriorityQueue<E extends Comparable<? super E>> {
     }
 
     private void bubbleDown() {
+        int index = 0;
+        int l;
+        int r;
+        while(hasLeftChild(index)) {
+            l = leftChildIndex(i);
+            r = rightChildIndex(i);
+
+
+        }
         
         
     }
