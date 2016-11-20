@@ -1,17 +1,19 @@
 // Inspiration:
 // http://courses.cs.washington.edu/courses/cse373/11wi/homework/5/
 
+import java.io.*;
+import java.util.*;
+
+
 public class PriorityQueue<E extends Comparable<? super E>> {
 
     private ArrayList<E> a;
-    private final int sign;
     private int size;
     
-    public PriorityQueue(ArrayList<E> a, Comparator<? super E> comp, int sign) {
+    public PriorityQueue(ArrayList<E> a, Comparator<? super E> comp) {
         this.a = a;
-        this.sign = sign;
+        size = a.size();
     }
-
     /*
     private ArrayList merge(ArrayList<E> a1, ArrayList<E> a2) {
 
@@ -30,17 +32,21 @@ public class PriorityQueue<E extends Comparable<? super E>> {
     */
 
     private void swap(int i1, int i2) {
-        E tmp = a[i1];
-        a[i1] = a[i2];
-        a[i2] = tmp;
+        E tmp = a.get(i1);
+        a.set(i1, a.get(i2));
+        a.set(i2, tmp);
     }
 
-    private bool hasParent(int i) {
+    private boolean hasParent(int i) {
         return i != 0;
     }
 
-    private bool hasLeftChild(int i) {
+    private boolean hasLeftChild(int i) {
         return leftChildIndex(i) <= size - 1;
+    }
+
+    private boolean hasRightChild(int i) {
+        return rightChildIndex(i) <= size - 1;
     }
 
     /*
@@ -62,7 +68,7 @@ public class PriorityQueue<E extends Comparable<? super E>> {
         int parentIndex;
         while(hasParent(index)) {
             parentIndex = index / 2;
-            if(sign * a[index].compareTo(a[parentIndex]) > 0) {
+            if(a.get(index).compareTo(a.get(parentIndex)) > 0) {
                 swap(index, parentIndex);
                 index = parentIndex;
             }
@@ -71,13 +77,22 @@ public class PriorityQueue<E extends Comparable<? super E>> {
 
     private void bubbleDown() {
         int index = 0;
-        int l;
+        int smallestChild;
         int r;
         while(hasLeftChild(index)) {
-            l = leftChildIndex(i);
-            r = rightChildIndex(i);
+            
+            smallestChild = leftChildIndex(index);
+            if (hasRightChild(index)) {
+                r = rightChildIndex(index);
+                if (a.get(smallestChild).compareTo(a.get(r)) > 0) {
+                    smallestChild = r;
+                }
+            }
 
-
+            if (a.get(index).compareTo(a.get(smallestChild)) > 0) {
+                swap(index, smallestChild);
+                index = smallestChild;
+            }
         }
         
         
@@ -86,8 +101,10 @@ public class PriorityQueue<E extends Comparable<? super E>> {
     /** 
      * Adds a value to the priority queue.
      */      
-    private void add(E) {
-        
+    public void add(E value) {
+        a.add(value);
+        size++;
+        bubbleUp();
     }
     
     /**
@@ -103,8 +120,8 @@ public class PriorityQueue<E extends Comparable<? super E>> {
      * @return the element at the top of the priority queue
      * @throws IllegalStateException if priority queue is empty
      */
-    public T peek() {
-
+    public E peek() {
+        return a.get(0);
     }
 
     /**
@@ -112,8 +129,13 @@ public class PriorityQueue<E extends Comparable<? super E>> {
      * @return the element at the top of the priority queue
      * @throws IllegalStateException if priority queue is empty
      */       
-    public T remove() {
-
+    public E remove() {
+        E temp = a.get(0);
+        a.set(0, a.get(size-1));
+        a.remove(size-1);
+        size--;
+        bubbleDown();
+        return temp;
     }
     
 }
