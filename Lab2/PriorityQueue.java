@@ -5,31 +5,17 @@ import java.io.*;
 import java.util.*;
 
 
-public class PriorityQueue<E extends Comparable<? super E>> {
+public class PriorityQueue<E> {
 
     private ArrayList<E> a;
     private int size;
+    private Comparator<? super E> comp;
     
     public PriorityQueue(ArrayList<E> a, Comparator<? super E> comp) {
         this.a = a;
-        size = a.size();
+        this.size = a.size();
+        this.comp = comp;
     }
-    /*
-    private ArrayList merge(ArrayList<E> a1, ArrayList<E> a2) {
-
-        ArrayList<E> hLeft;
-        ArrayList<E> hRight;
-        
-        if(a1.isEmpty()) {return a2;}
-        else if(a2.isEmpty()) {return a1;}
-        if(a1[0].compareTo(a2[0]) <= 0) {
-            hLeft = a1; hRight = a2;
-        } else {
-            hLeft = a2; hRight = a1;
-        }
-        
-    }
-    */
 
     private void swap(int i1, int i2) {
         E tmp = a.get(i1);
@@ -49,12 +35,6 @@ public class PriorityQueue<E extends Comparable<? super E>> {
         return rightChildIndex(i) <= size - 1;
     }
 
-    /*
-    private int parentIndex(int i) {
-        return i/2;
-    }
-    */
-    
     private int leftChildIndex(int i) {
         return 2 * i + 1;
     }
@@ -68,7 +48,7 @@ public class PriorityQueue<E extends Comparable<? super E>> {
         int parentIndex;
         while(hasParent(index)) {
             parentIndex = index / 2;
-            if(a.get(index).compareTo(a.get(parentIndex)) > 0) {
+            if(comp.compare(a.get(index), a.get(parentIndex)) > 0) {
                 swap(index, parentIndex);
                 index = parentIndex;
             }
@@ -84,12 +64,12 @@ public class PriorityQueue<E extends Comparable<? super E>> {
             smallestChild = leftChildIndex(index);
             if (hasRightChild(index)) {
                 r = rightChildIndex(index);
-                if (a.get(smallestChild).compareTo(a.get(r)) > 0) {
+                if (comp.compare(a.get(smallestChild), a.get(r)) > 0) {
                     smallestChild = r;
                 }
             }
 
-            if (a.get(index).compareTo(a.get(smallestChild)) > 0) {
+            if (comp.compare(a.get(index), a.get(smallestChild)) > 0) {
                 swap(index, smallestChild);
                 index = smallestChild;
             }
