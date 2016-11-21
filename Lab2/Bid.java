@@ -19,23 +19,23 @@ public class Bid {
         this.newValue = newValue;
     }
     
-    public String getName(Bid b) {
+    public String getName() {
         return name;
     }
 
-    public String getOp(Bid b) {
+    public String getOp() {
         return op;
     }
 
-    public int getValue(Bid b) {
+    public int getValue() {
         return value;
     }
 
-    public int getOldValue(Bid b) {
+    public int getOldValue() {
         return oldValue;
     }
 
-    public int getNewValue(Bid b) {
+    public int getNewValue() {
         return newValue;
     }
     
