@@ -4,8 +4,7 @@ public class Bid {
     private String op;
     private int value;
     private int oldValue;
-    private int newValue;
-    
+
     public void Bid(String name, String op, int value) {
         this.name = name;
         this.op = op;
@@ -16,7 +15,7 @@ public class Bid {
         this.name = name;
         this.op = op;
         this.oldValue = oldValue;
-        this.newValue = newValue;
+        this.value = newValue;
     }
     
     public String getName() {
@@ -33,10 +32,6 @@ public class Bid {
 
     public int getOldValue() {
         return oldValue;
-    }
-
-    public int getNewValue() {
-        return newValue;
     }
     
 }
