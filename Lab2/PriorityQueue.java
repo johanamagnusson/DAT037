@@ -10,13 +10,24 @@ public class PriorityQueue<E> {
     private ArrayList<E> a;
     private int size;
     private Comparator<? super E> comp;
+    private HashMap h;
     
     public PriorityQueue(ArrayList<E> a, Comparator<? super E> comp) {
         this.a = a;
         this.size = a.size();
         this.comp = comp;
+        this.h = new HashMap();
     }
 
+    private int hashCode(String str) {
+        int hash = 7;
+        for(int i = 0; i < str.length(); i++) {
+            hash = hash*31 + str.charAt(i);
+        } // Found from
+          // http://stackoverflow.com/questions/2624192/good-hash-function-for-strings
+        return hash;
+    }
+    
     private void swap(int i1, int i2) {
         E tmp = a.get(i1);
         a.set(i1, a.get(i2));
@@ -42,9 +53,9 @@ public class PriorityQueue<E> {
     private int rightChildIndex(int i) {
         return 2 * i + 2;
     }
-
-    private void bubbleUp() {
-        int index = this.size - 1;
+    
+    private void bubbleUp(int startIndex) {
+        int index = startIndex;
         int parentIndex;
         while(hasParent(index)) {
             parentIndex = index / 2;
@@ -55,8 +66,8 @@ public class PriorityQueue<E> {
         }
     }
 
-    private void bubbleDown() {
-        int index = 0;
+    private void bubbleDown(int startIndex) {
+        int index = startIndex;
         int smallestChild;
         int r;
         while(hasLeftChild(index)) {
@@ -74,8 +85,6 @@ public class PriorityQueue<E> {
                 index = smallestChild;
             }
         }
-        
-        
     }
     
     /** 
@@ -84,7 +93,8 @@ public class PriorityQueue<E> {
     public void add(E value) {
         a.add(value);
         size++;
-        bubbleUp();
+        int index = bubbleUp(size-1);
+        h.put(hashCode(E.getName()), index);
     }
     
     /**
@@ -114,7 +124,7 @@ public class PriorityQueue<E> {
         a.set(0, a.get(size-1));
         a.remove(size-1);
         size--;
-        bubbleDown();
+        bubbleDown(0);
         return temp;
     }
     
