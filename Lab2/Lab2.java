@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 import java.util.regex.*;
+import java.lang.Integer.*;
 
 /**
  * ...
@@ -15,7 +16,7 @@ public class Lab2 {
     public static void trade(List<Bid> bids) {
         // Implement this yourselves. Note that this file does not
         // define a Bid class.
-    }    
+    }
 
     /**
      * Parses a bid.
@@ -33,16 +34,16 @@ public class Lab2 {
 
         if (m.matches()) {
             if (m.group(2) == null) {
-                // m.group(1): The name of the buyer/seller.
-                // m.group(4): NK or NS.
-                // m.group(5): Old value.
-                // m.group(6): New value.
-                return new Bid(...);  // Incomplete code.
+                String name = m.group(1); // The name of the buyer/seller.
+                String op = m.group(4); // NK or NS.
+                int oldValue = Integer.parseInt(m.group(5)); // Old value.
+                int newValue = Integer.parseInt(m.group(6)); // New value.
+                return new Bid(name, op, oldValue, newValue);
             } else {
-                // m.group(1): The name of the buyer/seller.
-                // m.group(2): K or S.
-                // m.group(3): The value.
-                return new Bid(...);  // Incomplete code.
+                String name =  m.group(1); // The name of the buyer/seller.
+                String op =  m.group(2); // K or S.
+                int value = Integer.parseInt(m.group(3)); // The value.
+                return new Bid(name, op, value);
             }
         } else {
             throw new MalformedBid(s);
