@@ -16,6 +16,8 @@ public class Lab2 {
     public static void trade(List<Bid> bids) {
         // Implement this yourselves. Note that this file does not
         // define a Bid class.
+        PriorityQueue<Bid> sellQueue = new PriorityQueue<Bid>();
+        PriorityQueue<Bid> buyQueue = new PriorityQueue<Bid>();
     }
 
     /**
