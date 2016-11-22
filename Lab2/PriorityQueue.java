@@ -68,7 +68,7 @@ public class PriorityQueue<E> {
         int parentIndex;
         while(hasParent(index)) {
             parentIndex = index / 2;
-            if(comp.compare(a.get(index), a.get(parentIndex)) > 0) {
+            if(comp.compare(a.get(index), a.get(parentIndex)) < 0) {
                 swap(index, parentIndex);
                 h.put(a.get(index), index);
                 h.put(a.get(parentIndex), parentIndex);
