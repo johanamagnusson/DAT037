@@ -12,22 +12,30 @@ public class PriorityQueue<E> {
     private Comparator<? super E> comp;
     private HashMap h;
     
-    public PriorityQueue(ArrayList<E> a, Comparator<? super E> comp) {
-        this.a = a;
-        this.size = a.size();
+    public PriorityQueue(ArrayList<E> inputArray, Comparator<? super E> comp) {
+        this.a = new ArrayList<E>();
+        this.size = inputArray.size();
+        this.comp = comp;
+        this.h = new HashMap();
+        for (int i = 0; i <  size; i++) {
+            a.add(i, inputArray.get(i));
+        }
+        buildHeap();
+    }
+
+    public PriorityQueue(Comparator<? super E> comp) {
+        this.a = new ArrayList<E>();
+        this.size = 0;
         this.comp = comp;
         this.h = new HashMap();
     }
 
-    private int hashCode(String str) {
-        int hash = 7;
-        for(int i = 0; i < str.length(); i++) {
-            hash = hash*31 + str.charAt(i);
-        } // Found from
-          // http://stackoverflow.com/questions/2624192/good-hash-function-for-strings
-        return hash;
+    private void buildHeap () {
+        for (int i = size / 2; i > 0; i--) {
+            bubbleDown(i);
+        }
     }
-    
+
     private void swap(int i1, int i2) {
         E tmp = a.get(i1);
         a.set(i1, a.get(i2));
@@ -61,7 +69,12 @@ public class PriorityQueue<E> {
             parentIndex = index / 2;
             if(comp.compare(a.get(index), a.get(parentIndex)) > 0) {
                 swap(index, parentIndex);
+                h.put(a.get(index), index);
+                h.put(a.get(parentIndex), parentIndex);
                 index = parentIndex;
+            } else {
+                h.put(a.get(index), index);
+                break;
             }
         }
     }
@@ -82,7 +95,12 @@ public class PriorityQueue<E> {
 
             if (comp.compare(a.get(index), a.get(smallestChild)) > 0) {
                 swap(index, smallestChild);
+                h.put(a.get(index), index);
+                h.put(a.get(smallestChild), smallestChild);
                 index = smallestChild;
+            } else {
+                h.put(a.get(index), index);
+                break;
             }
         }
     }
@@ -93,8 +111,19 @@ public class PriorityQueue<E> {
     public void add(E value) {
         a.add(value);
         size++;
-        int index = bubbleUp(size-1);
-        h.put(hashCode(E.getName()), index);
+        bubbleUp(size-1);
+    }
+
+    public int findElementIndex(E element) {
+        int elementIndex = h.get(element);
+        return elementIndex;
+    }
+
+    public void replace(E oldItem, E newItem) {
+       int oldIndex = findElementIndex(oldItem);
+       a.set(oldIndex, newItem);
+       bubbleUp(oldIndex);
+       bubbleDown(oldIndex);
     }
     
     /**
