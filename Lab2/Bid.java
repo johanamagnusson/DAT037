@@ -5,13 +5,13 @@ public class Bid {
     private int value;
     private int oldValue;
 
-    public void Bid(String name, String op, int value) {
+    public Bid(String name, String op, int value) {
         this.name = name;
         this.op = op;
         this.value = value;
     }
     
-    public void Bid(String name, String op, int oldValue, int newValue) {
+    public Bid(String name, String op, int oldValue, int newValue) {
         this.name = name;
         this.op = op;
         this.oldValue = oldValue;

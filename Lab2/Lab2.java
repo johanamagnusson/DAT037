@@ -15,11 +15,11 @@ public class Lab2 {
         // Implement this yourselves. Note that this file does not
         // define a Bid class.
         
-        PriorityQueue<Bid> sellQueue = new PriorityQueue<Bid>(new MaxComparator);
-        PriorityQueue<Bid> buyQueue = new PriorityQueue<Bid>(new MinComparator);
+        PriorityQueue<Bid> sellQueue = new PriorityQueue<Bid>(new MaxComparator());
+        PriorityQueue<Bid> buyQueue = new PriorityQueue<Bid>(new MinComparator());
         int size = bids.size();
         
-        for(i = 0; i < size; i++) {
+        for(int i = 0; i < size; i++) {
             Bid tmpBid = bids.get(i);
             switch (tmpBid.getOp()) {
             case "S":
@@ -59,21 +59,21 @@ public class Lab2 {
         }
     }
 
-    public void printOrderBook(PriorityQueue buyQueue, PriorityQueue sellQueue) {
+    public void printOrderBook(PriorityQueue<Bid> buyQueue, PriorityQueue<Bid> sellQueue) {
         System.out.println("Orderbok:");
         String sellStr = "Säljare:";
         String buyStr = "Köpare:";
         while(!sellQueue.isEmpty()) {
             sellStr = sellStr + " " + sellQueue.peek().getName() + " " +
-                sellQueue.remove().getValue;
+                sellQueue.remove().getValue();
             if(!sellQueue.isEmpty()) {
                 sellStr = sellStr + ",";
             }
         }
         while(!buyQueue.isEmpty()) {
             buyStr = buyStr + " " + buyQueue.peek().getName() + " " +
-                buyQueue.remove().getValue;
-            if(!byeQueue.isEmpty()) {
+                buyQueue.remove().getValue();
+            if(!buyQueue.isEmpty()) {
                 buyStr = buyStr + ",";
             }
         }
