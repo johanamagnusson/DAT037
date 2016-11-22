@@ -64,6 +64,7 @@ public class PriorityQueue<E> {
     
     private void bubbleUp(int startIndex) {
         int index = startIndex;
+        h.put(a.get(index), index);
         int parentIndex;
         while(hasParent(index)) {
             parentIndex = index / 2;
@@ -108,22 +109,32 @@ public class PriorityQueue<E> {
     /** 
      * Adds a value to the priority queue.
      */      
-    public void add(E value) {
-        a.add(value);
+    public void add(E element) {
+        a.add(element);
         size++;
         bubbleUp(size-1);
+        //System.out.println(h.get(element));
     }
-
+    
     public int findElementIndex(E element) {
+        /* DEBUG:
+        for (E name: h.keySet()){  
+            int key =name.hashCode();
+            int value = h.get(name);
+            System.out.println(key + " " + value + " " + h.get(element));
+        } 
+        System.out.println("findElementIndex: " + element.hashCode() +
+                           " " + h.get(element));
+        */
         int elementIndex = h.get(element);
         return elementIndex;
     }
-
-    public void replace(E oldItem, E newItem) {
-       int oldIndex = findElementIndex(oldItem);
-       a.set(oldIndex, newItem);
-       bubbleUp(oldIndex);
-       bubbleDown(oldIndex);
+    
+    public void replace(E oldItem, E newItem) { 
+        int oldIndex = findElementIndex(oldItem);
+        a.set(oldIndex, newItem);
+        bubbleUp(oldIndex);
+        bubbleDown(oldIndex);
     }
     
     /**

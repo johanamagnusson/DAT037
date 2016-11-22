@@ -22,6 +22,25 @@ public class Bid {
     public int hashCode() {
         return name.hashCode();
     }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final Bid other = (Bid) obj;
+        if (this.name == null) {
+            if (other.getName() != null) {
+                return false;
+            }
+        } else if (!this.name.equals(other.getName())) {
+            return false;
+        }
+        return true;
+    }
     
     public String getName() {
         return name;

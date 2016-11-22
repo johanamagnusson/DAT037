@@ -15,8 +15,8 @@ public class Lab2 {
         // Implement this yourselves. Note that this file does not
         // define a Bid class.
         
-        PriorityQueue<Bid> sellQueue = new PriorityQueue<Bid>(new MaxComparator());
-        PriorityQueue<Bid> buyQueue = new PriorityQueue<Bid>(new MinComparator());
+        PriorityQueue<Bid> sellQueue = new PriorityQueue<Bid>(new MinComparator());
+        PriorityQueue<Bid> buyQueue = new PriorityQueue<Bid>(new MaxComparator());
         int size = bids.size();
         
         for(int i = 0; i < size; i++) {
@@ -39,7 +39,7 @@ public class Lab2 {
                 if(!sellQueue.isEmpty()) {
                     if(sellQueue.peek().getValue() <= tmpBid.getValue()) {
                         System.out.println(tmpBid.getName() + " köper från " +
-                                           sellQueue.peek().getName() + " för " +
+                                           sellQueue.remove().getName() + " för " +
                                            tmpBid.getValue() + " kr");
                     } else {
                         buyQueue.add(tmpBid);
@@ -49,10 +49,12 @@ public class Lab2 {
                 }
                 break;
             case "NS":
-                System.out.println("Not yet implemented");
+                sellQueue.replace(tmpBid, tmpBid);
                 break;
             case "NK":
-                System.out.println("Not yet implemented");
+                //System.out.println(tmpBid.getName() + " " + buyQueue.peek().getName()
+                //                   + " " + tmpBid.hashCode() + " " + buyQueue.peek().hashCode());
+                buyQueue.replace(tmpBid, tmpBid);
                 break;
             default: break;
             }
