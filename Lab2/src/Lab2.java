@@ -51,11 +51,25 @@ public class Lab2 {
                 break;
             case "NS":
                 sellQueue.replace(tmpBid, tmpBid);
+                if(!buyQueue.isEmpty()) {
+                    if(buyQueue.peek().getValue() >= tmpBid.getValue()) {
+                        System.out.println(buyQueue.peek().getName() + " köper från " +
+                                           sellQueue.remove().getName() + " för " +
+                                           buyQueue.remove().getValue() + " kr");
+                    }
+                }
                 break;
             case "NK":
                 //System.out.println(tmpBid.getName() + " " + buyQueue.peek().getName()
                 //                   + " " + tmpBid.hashCode() + " " + buyQueue.peek().hashCode());
                 buyQueue.replace(tmpBid, tmpBid);
+                if(!sellQueue.isEmpty()) {
+                    if(sellQueue.peek().getValue() <= tmpBid.getValue()) {
+                        System.out.println(tmpBid.getName() + " köper från " +
+                                           sellQueue.remove().getName() + " för " +
+                                           buyQueue.remove().getValue() + " kr");
+                    }
+                }
                 break;
             default: break;
             }

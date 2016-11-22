@@ -64,20 +64,18 @@ public class PriorityQueue<E> {
     
     private void bubbleUp(int startIndex) {
         int index = startIndex;
-        h.put(a.get(index), index);
         int parentIndex;
         while(hasParent(index)) {
             parentIndex = index / 2;
             if(comp.compare(a.get(index), a.get(parentIndex)) < 0) {
                 swap(index, parentIndex);
                 h.put(a.get(index), index);
-                h.put(a.get(parentIndex), parentIndex);
                 index = parentIndex;
             } else {
-                h.put(a.get(index), index);
                 break;
             }
         }
+        h.put(a.get(index), index);
     }
 
     private void bubbleDown(int startIndex) {
@@ -97,13 +95,13 @@ public class PriorityQueue<E> {
             if (comp.compare(a.get(index), a.get(smallestChild)) > 0) {
                 swap(index, smallestChild);
                 h.put(a.get(index), index);
-                h.put(a.get(smallestChild), smallestChild);
                 index = smallestChild;
             } else {
                 h.put(a.get(index), index);
                 break;
             }
         }
+        h.put(a.get(index), index);
     }
     
     /** 
@@ -130,15 +128,15 @@ public class PriorityQueue<E> {
         return elementIndex;
     }
     
-    public void replace(E oldItem, E newItem) { 
-        int oldIndex = findElementIndex(oldItem);
-        System.out.println("ArraySize: " + a.size());
-        System.out.println("OldIndex: " + oldIndex);
-        a.set(oldIndex, newItem);
+    public void replace(E oldElement, E newElement) { 
+        int oldIndex = findElementIndex(oldElement);
+        //System.out.println("ArraySize: " + a.size());
+        //System.out.println("OldIndex: " + oldIndex);
+        a.set(oldIndex, newElement);
         bubbleUp(oldIndex);
         bubbleDown(oldIndex);
     }
-    
+
     /**
      * Tests if the priority queue is empty.
      */     
@@ -167,7 +165,9 @@ public class PriorityQueue<E> {
         a.set(0, a.get(size-1));
         a.remove(size-1);
         size--;
-        bubbleDown(0);
+        if (size != 0) {
+            bubbleDown(0);
+        }
         return tmp;
     }
     
