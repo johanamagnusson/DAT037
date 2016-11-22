@@ -55,11 +55,13 @@ public class Lab2 {
                 System.out.println("Not yet implemented");
                 break;
             default: break;
-            } 
+            }
+            
         }
+        printOrderBook(buyQueue, sellQueue);
     }
 
-    public void printOrderBook(PriorityQueue<Bid> buyQueue, PriorityQueue<Bid> sellQueue) {
+    public static void printOrderBook(PriorityQueue<Bid> buyQueue, PriorityQueue<Bid> sellQueue) {
         System.out.println("Orderbok:");
         String sellStr = "Säljare:";
         String buyStr = "Köpare:";
@@ -77,6 +79,8 @@ public class Lab2 {
                 buyStr = buyStr + ",";
             }
         }
+        System.out.println(sellStr);
+        System.out.println(buyStr);
     }
     
     /**
