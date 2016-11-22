@@ -36,7 +36,7 @@ public class Lab2 {
                 }
                 break;
             case "K":
-                if(!buyQueue.isEmpty()) {
+                if(!sellQueue.isEmpty()) {
                     if(sellQueue.peek().getValue() <= tmpBid.getValue()) {
                         System.out.println(tmpBid.getName() + " köper från " +
                                            sellQueue.peek().getName() + " för " +
