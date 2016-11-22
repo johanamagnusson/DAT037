@@ -16,8 +16,49 @@ public class Lab2 {
     public static void trade(List<Bid> bids) {
         // Implement this yourselves. Note that this file does not
         // define a Bid class.
-        PriorityQueue<Bid> sellQueue = new PriorityQueue<Bid>();
-        PriorityQueue<Bid> buyQueue = new PriorityQueue<Bid>();
+        
+        PriorityQueue<Bid> sellQueue = new PriorityQueue<Bid>(new MaxComparator);
+        PriorityQueue<Bid> buyQueue = new PriorityQueue<Bid>(new MinComparator);
+        int size = bids.size();
+        
+        for(i = 0; i < size; i++) {
+            Bid tmpBid = bids.get(i);
+            switch (tmpBid.getOp()) {
+            case "S":
+                if(!buyQueue.isEmpty()) {
+                    if(buyQueue.peek().getValue() >= tmpBid.getValue()) {
+                        System.out.println(buyQueue.peek().getName() + " köper från " +
+                                           tmpBid.getName() + " för " +
+                                           buyQueue.remove().getValue() + " kr");
+                    } else {
+                        sellQueue.add(tmpBid);
+                    }
+                } else {
+                    sellQueue.add(tmpBid);
+                }
+                break;
+            case "K":
+                if(!buyQueue.isEmpty()) {
+                    if(sellQueue.peek().getValue() <= tmpBid.getValue()) {
+                        System.out.println(tmpBid.getName() + " köper från " +
+                                           sellQueue.peek().getName() + " för " +
+                                           tmpBid.getValue() + " kr");
+                    } else {
+                        buyQueue.add(tmpBid);
+                    }
+                } else {
+                    buyQueue.add(tmpBid);
+                }
+                break;
+            case "NS":
+                System.out.println("Not yet implemented");
+                break;
+            case "NK":
+                System.out.println("Not yet implemented");
+                break;
+            default: break;
+            } 
+        }
     }
 
     /**
