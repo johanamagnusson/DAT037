@@ -18,13 +18,9 @@ public class Bid {
         this.value = newValue;
     }
 
-    public int getHashCode() {
-        int hash = 7;
-        for(int i = 0; i < this.name.length(); i++) {
-            hash = hash*31 + this.name.charAt(i);
-        } // Found from
-          // http://stackoverflow.com/questions/2624192/good-hash-function-for-strings
-        return hash;
+    @Override
+    public int hashCode() {
+        return name.hashCode();
     }
     
     public String getName() {

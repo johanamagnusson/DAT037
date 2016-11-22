@@ -6,13 +6,11 @@ import java.lang.Integer.*;
 /**
  * ...
  */
-
 public class Lab2 {
 
     /**
      * ...
      */
-
     public static void trade(List<Bid> bids) {
         // Implement this yourselves. Note that this file does not
         // define a Bid class.
@@ -61,6 +59,26 @@ public class Lab2 {
         }
     }
 
+    public void printOrderBook(PriorityQueue buyQueue, PriorityQueue sellQueue) {
+        System.out.println("Orderbok:");
+        String sellStr = "Säljare:";
+        String buyStr = "Köpare:";
+        while(!sellQueue.isEmpty()) {
+            sellStr = sellStr + " " + sellQueue.peek().getName() + " " +
+                sellQueue.remove().getValue;
+            if(!sellQueue.isEmpty()) {
+                sellStr = sellStr + ",";
+            }
+        }
+        while(!buyQueue.isEmpty()) {
+            buyStr = buyStr + " " + buyQueue.peek().getName() + " " +
+                buyQueue.remove().getValue;
+            if(!byeQueue.isEmpty()) {
+                buyStr = buyStr + ",";
+            }
+        }
+    }
+    
     /**
      * Parses a bid.
      *
@@ -68,7 +86,6 @@ public class Lab2 {
      *
      * @throws MalformedBid If the bid cannot be parsed.
      */
-
     public static Bid parseBid(String s) throws MalformedBid {
         Matcher m = Pattern.compile(
                       "\\s*(\\S+)\\s+" +
