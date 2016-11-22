@@ -10,13 +10,13 @@ public class PriorityQueue<E> {
     private ArrayList<E> a;
     private int size;
     private Comparator<? super E> comp;
-    private HashMap h;
+    private HashMap<E, Integer> h;
     
     public PriorityQueue(ArrayList<E> inputArray, Comparator<? super E> comp) {
         this.a = new ArrayList<E>();
         this.size = inputArray.size();
         this.comp = comp;
-        this.h = new HashMap();
+        this.h = new HashMap<E, Integer>();
         for (int i = 0; i <  size; i++) {
             a.add(i, inputArray.get(i));
         }
@@ -27,7 +27,7 @@ public class PriorityQueue<E> {
         this.a = new ArrayList<E>();
         this.size = 0;
         this.comp = comp;
-        this.h = new HashMap();
+        this.h = new HashMap<E, Integer>();
     }
 
     private void buildHeap () {
