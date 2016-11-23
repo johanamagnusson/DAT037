@@ -92,7 +92,7 @@ public class Bid {
     }
 
     /**
-     * Getter for the price or the old price denpending on the type of Bid object.
+     * Getter for the price or the new price denpending on the type of Bid object.
      *
      * @return price of the Bid object or the 
      */
@@ -101,7 +101,7 @@ public class Bid {
     }
 
     /**
-     * Getter for the price or the new price of Bid object.
+     * Getter for the old price of Bid object.
      *
      * @return new price of the Bid object 
      */

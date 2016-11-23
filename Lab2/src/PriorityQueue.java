@@ -226,7 +226,6 @@ public class PriorityQueue<E> {
      * queue.
      *
      * @return the element at the top of the priority queue
-     * @throws IllegalStateException if priority queue is empty
      */
     public E peek() {
         return a.get(0);
@@ -236,7 +235,6 @@ public class PriorityQueue<E> {
      * Deletes and returns the element at the top of the priority queue.
      *
      * @return the element at the top of the priority queue
-     * @throws IllegalStateException if priority queue is empty
      */       
     public E remove() {
         E tmp = a.get(0);
