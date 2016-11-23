@@ -4,7 +4,14 @@ import java.util.regex.*;
 import java.lang.Integer.*;
 
 /**
- * ...
+ * The Lab2 class reads a text file or command line input to get a list of
+ * stockmarket bids. It then matches these bids with eachother and performs trades.
+ * Lastly it prints which trades has been performed and which bids are left in the
+ * orderbook.
+ *
+ * @author Andreas Magnusson, Carl Smedstad
+ * @version 1.0
+ * @since 16-11-23
  */
 public class Lab2 {
 

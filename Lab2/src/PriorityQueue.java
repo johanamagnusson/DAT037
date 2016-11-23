@@ -1,10 +1,17 @@
-// Inspiration:
-// http://courses.cs.washington.edu/courses/cse373/11wi/homework/5/
-
+// Inspiration from: http://courses.cs.washington.edu/courses/cse373/11wi/homework/5/
 import java.io.*;
 import java.util.*;
 
-
+/**
+ * The PriorityQueue class reads a text file or command line input to get a list of
+ * stockmarket bids. It then matches these bids with eachother and performs trades.
+ * Lastly it prints which trades has been performed and which bids are left in the
+ * orderbook.
+ *
+ * @author Andreas Magnusson, Carl Smedstad
+ * @version 1.0
+ * @since 16-11-23
+ */
 public class PriorityQueue<E> {
 
     private ArrayList<E> a;
