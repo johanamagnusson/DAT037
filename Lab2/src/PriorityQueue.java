@@ -3,10 +3,9 @@ import java.io.*;
 import java.util.*;
 
 /**
- * The PriorityQueue class reads a text file or command line input to get a list of
- * stockmarket bids. It then matches these bids with eachother and performs trades.
- * Lastly it prints which trades has been performed and which bids are left in the
- * orderbook.
+ * The PriorityQueue class generates, sorts and holds a binary heap. Provides 
+ * functionality to peek, add, remove and replace elements aswell as to check if
+ * the PriorityQueue is empty.
  *
  * @author Andreas Magnusson, Carl Smedstad
  * @version 1.0
@@ -18,7 +17,13 @@ public class PriorityQueue<E> {
     private int size;
     private Comparator<? super E> comp;
     private HashMap<E, Integer> h;
-    
+
+    /**
+     * Constructor. Constructs a priority queue from the ArrayList found in the input.
+     *
+     * @param inputArray array of unsorted objects
+     * @param comp comparator used in sorting
+     */
     public PriorityQueue(ArrayList<E> inputArray, Comparator<? super E> comp) {
         this.a = new ArrayList<E>();
         this.size = inputArray.size();
@@ -30,6 +35,11 @@ public class PriorityQueue<E> {
         buildHeap();
     }
 
+    /**
+     * Constructor. Constructs an empty priority queue.
+     *
+     * @param comp comparator used the sorting
+     */
     public PriorityQueue(Comparator<? super E> comp) {
         this.a = new ArrayList<E>();
         this.size = 0;
@@ -37,38 +47,86 @@ public class PriorityQueue<E> {
         this.h = new HashMap<E, Integer>();
     }
 
+    /**
+     * The buildHeap method sorts the ArrayList to form a binary heap.
+     */
     private void buildHeap () {
         for (int i = size / 2; i > 0; i--) {
             bubbleDown(i);
         }
     }
 
+    /**
+     * The swap method swaps two elements in the priority queue.
+     *
+     * @param i1 index of the first element in the swap
+     * @param i2 index of the second element in the swap
+     */
     private void swap(int i1, int i2) {
         E tmp = a.get(i1);
         a.set(i1, a.get(i2));
         a.set(i2, tmp);
     }
-
+    
+    /**
+     * The hasParent method checks if the element at the index has a parent.
+     *
+     * @param i index of element to check
+     * @return <code>true</code> if the element at the index has a parent,
+     *         <code>false</code> otherwise
+     */
     private boolean hasParent(int i) {
         return i != 0;
     }
 
+    /**
+     * The hasLeftChild method checks if the element at the index has a left child.
+     *
+     * @param i index of element to check
+     * @return <code>true</code> if the element at the index has a left child,
+     *         <code>false</code> otherwise
+     */
     private boolean hasLeftChild(int i) {
         return leftChildIndex(i) <= size - 1;
     }
 
+    /**
+     * The hasRightChild method checks if the element at the index has a right child.
+     *
+     * @param i index of element to check
+     * @return <code>true</code> if the element at the index has a right child,
+     *         <code>false</code> otherwise
+     */
     private boolean hasRightChild(int i) {
         return rightChildIndex(i) <= size - 1;
     }
 
+    /**
+     * The leftChildIndex method finds the index of the left child.
+     *
+     * @param i index of element to check
+     * @return index of left child in the binary heap
+     */
     private int leftChildIndex(int i) {
         return 2 * i + 1;
     }
 
+    /**
+     * The rightChildIndex method finds the index of the right child.
+     *
+     * @param i index of element to check
+     * @return index of right child in the binary heap
+     */
     private int rightChildIndex(int i) {
         return 2 * i + 2;
     }
-    
+
+    /**
+     * The bubbleUp method checks upwards if the element on the index is 
+     * correctly placed. If not the element is moved up in the binary heap.
+     *
+     * @param startIndex the index to start the bubbling from
+     */
     private void bubbleUp(int startIndex) {
         int index = startIndex;
         int parentIndex;
@@ -85,20 +143,24 @@ public class PriorityQueue<E> {
         h.put(a.get(index), index);
     }
 
+    /**
+     * The bubbleDown method checks downwards if the element on the index is 
+     * correctly placed. If not the element is moved down in the binary heap.
+     *
+     * @param startIndex the index to start the bubbling from
+     */
     private void bubbleDown(int startIndex) {
         int index = startIndex;
         int smallestChild;
         int r;
         while(hasLeftChild(index)) {
-            
-            smallestChild = leftChildIndex(index);
+            smallestChild = leftChildIndex(index);            
             if (hasRightChild(index)) {
                 r = rightChildIndex(index);
                 if (comp.compare(a.get(smallestChild), a.get(r)) > 0) {
                     smallestChild = r;
                 }
             }
-
             if (comp.compare(a.get(index), a.get(smallestChild)) > 0) {
                 swap(index, smallestChild);
                 h.put(a.get(index), index);
@@ -113,32 +175,37 @@ public class PriorityQueue<E> {
     
     /** 
      * Adds a value to the priority queue.
+     *
+     * @param element the element to be added
      */      
     public void add(E element) {
         a.add(element);
         size++;
         bubbleUp(size-1);
-        //System.out.println(h.get(element));
+        // DEBUG: System.out.println(h.get(element));
     }
-    
-    public int findElementIndex(E element) {
-        /* DEBUG:
-        for (E name: h.keySet()){  
-            int key =name.hashCode();
-            int value = h.get(name);
-            System.out.println(key + " " + value + " " + h.get(element));
-        } 
-        System.out.println("findElementIndex: " + element.hashCode() +
-                           " " + h.get(element));
-        */
+
+    /**
+     * The findElementIndex method finds the index of a given element.
+     *
+     * @param element the element to be found
+     * @return index of the found element
+     */
+    private int findElementIndex(E element) {
         int elementIndex = h.get(element);
         return elementIndex;
     }
-    
+
+    /**
+     * The replace method finds and replaces an element with a new one.
+     *
+     * @param oldElement the element to be replaced
+     * @param newElement the element to replace with
+     */
     public void replace(E oldElement, E newElement) { 
         int oldIndex = findElementIndex(oldElement);
-        //System.out.println("ArraySize: " + a.size());
-        //System.out.println("OldIndex: " + oldIndex);
+        // DEBUG: System.out.println("ArraySize: " + a.size());
+        //        System.out.println("OldIndex: " + oldIndex);
         a.set(oldIndex, newElement);
         bubbleUp(oldIndex);
         bubbleDown(oldIndex);
@@ -146,6 +213,9 @@ public class PriorityQueue<E> {
 
     /**
      * Tests if the priority queue is empty.
+     *
+     * @return <code>true</code> if the PriorityQueue is empty, 
+     *         <code>false</code> otherwise
      */     
     public boolean isEmpty() {
         return size == 0;
@@ -154,6 +224,7 @@ public class PriorityQueue<E> {
     /**
      * Returns, but does not delete the element at the top of the priority
      * queue.
+     *
      * @return the element at the top of the priority queue
      * @throws IllegalStateException if priority queue is empty
      */
@@ -163,6 +234,7 @@ public class PriorityQueue<E> {
 
     /**
      * Deletes and returns the element at the top of the priority queue.
+     *
      * @return the element at the top of the priority queue
      * @throws IllegalStateException if priority queue is empty
      */       
