@@ -1,0 +1,60 @@
+Time complexity analysis of DAT037 Lab 2
+
+* Insertion of a new bid:
+    Once a bid is to be appended to the queue it is added at the end of the
+    array storing the binary heap (we are using ArrayList so the size of the
+    array is increased dynamically). Once the bid is appended to the heap
+    it has to be put in the correct place and so and algorithm called
+    "Bubble Up" is used. It compares the current element's value to that of
+    its parent and stops if it already is in the correct order. If this is
+    not the case, it swaps the element with its parent and sets the current
+    element to the parent, and from there reiterates until the stop condition
+    is met. The worst case of this would be if the element needed to move all
+    the way from the bottom to the top, which requires $k$ iterations if $k$
+    is the height of the heap. In a binary heap the amount of elements is
+    $n = 2^k \Rightarrow k = \log_2(n) ~ O(\log n)$. Since adding the element
+    to the end of the array is done in constant time, the total time complexity
+    is $O(\log n)$.
+
+
+* Carrying out a purchase
+    A buy or sell bid is matched against the root value of the sell or buy
+    queue respectively, which is an elementary operation done in constant
+    time. If there is a match the purchase is carried out and the root element
+    is to be removed from the queue. This is done my removing the root element
+    and moving the end element of the array to the root, and then perform
+    an algorithm called "Bubble Down" to put the element in its correct place.
+    This works (quite unsurprisingly) pretty much the same as Bubble Up, except
+    the current element is compared to its smallest or largest child depending
+    on whether it is part of a min heap  or max heap. If it is in its correct
+    place stop, otherwise swap and reiterate until the current is in the correct
+    order. The time complexity is then the same as of Bubble Up, since the only
+    difference is that one more comparison is made each step which is done in 
+    constant time and the total is logarithmic.
+
+
+* Changing a bid value:
+    If a bid object (identified by the buyers/sellers name) exits in the queue
+    the index of where in the array it is stored needs to be found. Using a
+    hash table this is done in constant time. Handling the hash table for the
+    add and remove functions require some extra operations; computing hash code
+    and putting the element's array index in the table. This is also done in
+    Bubble Up and Bubble Down every time two elements are swapped but all of
+    the operations are done in constant time and does not change the time complexity
+    of these functions. Once the array index of the element that is to be changed
+    is found, the new element is put at that index in the array. It then needs
+    to be sorted by, either up or down, and this is done by simply calling both
+    Bubble Up and Bubble Down from that index, since the one that is wrong will
+    stop right away. Since all operations hence are done in constant time except
+    for the sorting, the total complexity is decided by Bubble Up or Bubble Down
+    and therefore is logarithmic.
+
+
+
+*    Ni ska också ange vad den asymptotiska komplexiteten för att
+     skriva ut prioritetsköerna är och motivera detta.
+
+* Time complexity of printing the queues
+    
+
+
