@@ -50,11 +50,13 @@ Time complexity analysis of DAT037 Lab 2
     and therefore is logarithmic.
 
 
-
-*    Ni ska också ange vad den asymptotiska komplexiteten för att
-     skriva ut prioritetsköerna är och motivera detta.
-
 * Time complexity of printing the queues
-    
+    To print the queues in the correct order (starting from the root and taking the
+    next in ascending/descending order for min/max heap) the root needs to be removed
+    and the heap resorted with Bubble Down every step of the print. If the heap
+    contains $n$ elements, the total complexity will then be $O(n \log n)$, since
+    the remove function will be called one time for each print, $n$ times.
+
+ 
 
 
