@@ -16,11 +16,14 @@ import java.lang.Integer.*;
 public class Lab2 {
 
     /**
-     * ...
+     * The trade method iterates through all bids and sorts them into four categories 
+     * (buy, sell, new buy price and new sell price). In the iteration each bid is
+     * checked if it can be traded right away with a previously iterated bid, if not
+     * the bid is saved in a PriorityQueue.
+     * 
+     * @param bids list of bids to trade
      */
     public static void trade(List<Bid> bids) {
-        // Implement this yourselves. Note that this file does not
-        // define a Bid class.
         
         PriorityQueue<Bid> sellQueue = new PriorityQueue<Bid>(new MinComparator());
         PriorityQueue<Bid> buyQueue = new PriorityQueue<Bid>(new MaxComparator());
@@ -40,7 +43,7 @@ public class Lab2 {
                     }
                 } else {
                     sellQueue.add(tmpBid);
-                    // System.out.println("Added: " + tmpBid.getValue());
+                    // DEBUG: System.out.println("Added: " + tmpBid.getValue());
                 }
                 break;
             case "K":
@@ -67,8 +70,9 @@ public class Lab2 {
                 }
                 break;
             case "NK":
-                //System.out.println(tmpBid.getName() + " " + buyQueue.peek().getName()
-                //                   + " " + tmpBid.hashCode() + " " + buyQueue.peek().hashCode());
+                // DEBUG: System.out.println(tmpBid.getName() + " " +
+                //        buyQueue.peek().getName() + " " + tmpBid.hashCode() + " " +
+                //        buyQueue.peek().hashCode());
                 buyQueue.replace(tmpBid, tmpBid);
                 if(!sellQueue.isEmpty()) {
                     if(sellQueue.peek().getValue() <= tmpBid.getValue()) {
@@ -80,12 +84,20 @@ public class Lab2 {
                 break;
             default: break;
             }
-            // printOrderBook(buyQueue, sellQueue);
+            // DEBUG: printOrderBook(buyQueue, sellQueue);
         }
         printOrderBook(buyQueue, sellQueue);
     }
 
-    public static void printOrderBook(PriorityQueue<Bid> buyQueue, PriorityQueue<Bid> sellQueue) {
+    /**
+     * The printOrderBook method recieves two PriorityQueues and prints an orderbook
+     * consisting of buy and sell bids.
+     *
+     * @param buyQueue a PriorityQueue of buy bids
+     * @param sellQueue a PriorityQueue of sell bids
+     */
+    public static void printOrderBook(PriorityQueue<Bid> buyQueue,
+                                      PriorityQueue<Bid> sellQueue) {
         System.out.println("Orderbok:");
         String sellStr = "Säljare:";
         String buyStr = "Köpare:";
@@ -110,9 +122,9 @@ public class Lab2 {
     /**
      * Parses a bid.
      *
-     * @param s The string that should be parsed.
-     *
-     * @throws MalformedBid If the bid cannot be parsed.
+     * @param s the string that should be parsed
+     * @return a bid object
+     * @throws MalformedBid if the bid cannot be parsed
      */
     public static Bid parseBid(String s) throws MalformedBid {
         Matcher m = Pattern.compile(
@@ -141,11 +153,10 @@ public class Lab2 {
     /**
      * Parses line-separated bids from the given Readable thing.
      *
-     * @param input The character stream that should be parsed.
-     *
-     * @throws MalformedBid If some bid couldn't be parsed.
+     * @param input the character stream that should be parsed
+     * @return a list of bid objects
+     * @throws MalformedBid if some bid couldn't be parsed
      */
-
     public static List<Bid> parseBids(Readable input) throws MalformedBid {
         ArrayList<Bid> bids = new ArrayList<Bid>();
         Scanner s = new Scanner(input);
@@ -160,7 +171,6 @@ public class Lab2 {
     /**
      * Exception class for malformed bids.
      */
-
     public static class MalformedBid extends Exception {
         MalformedBid(String bid) {
             super("Malformed bid: " + bid + ".");
@@ -170,7 +180,6 @@ public class Lab2 {
     /**
      * Prints usage info.
      */
-
     public static void usageInfo() {
         System.err.println("Usage: java Aktiehandel [<file>]");
         System.err.println("If no file is given, then input is " +
@@ -178,9 +187,11 @@ public class Lab2 {
     }
 
     /**
-     * ...
+     * Main function. Reads a text file or command line input to get a list of bids and
+     * perform and print trades.
+     *
+     * @param args argument that has to be a path to a text file
      */
-
     public static void main(String[] args) {
         if (args.length >= 2) {
             usageInfo();
