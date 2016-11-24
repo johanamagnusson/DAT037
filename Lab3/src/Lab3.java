@@ -20,11 +20,15 @@ public class Lab3 {
             System.out.println("MalformedData exception.");
         }
         String startNode = args[2];
-        String stopNode = args[3];
-
+        String stopNode = args[3];        
+        
+        /* DEBUG
         for(int i = 0; i < nodeList.size(); i++) {
             System.out.println(nodeList.get(i).getName());
         }
+        */
+
+        
         
     }
     
