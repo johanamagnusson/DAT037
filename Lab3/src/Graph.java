@@ -1,5 +1,11 @@
 public class Graph {
 
-    public Graph(array[][])
+	private String[] nodeNameArray;
+	
+    public Graph(String[] nodeNameArray, List<BLineTable> edgeTable) {
+		this.nodeNameArray = nodeNameArray;
+		buildAdjacencyList()
+	}
 
+	private ArrayList<
 }
