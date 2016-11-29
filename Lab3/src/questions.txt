@@ -1,0 +1,3 @@
+Vad är det den genereiska typen representerar? Är det en node? Ett node namn? En hel graf?
+Ska DijstraPath verkligen ta typerna BStop och BLineStop i sin konstruktor? Är det inte mer
+generellt att låta den ta två listor; en för nodes och en för edges?
