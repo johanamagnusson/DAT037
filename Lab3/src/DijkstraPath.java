@@ -13,6 +13,10 @@ public class DijkstraPath<E> implements Path<E> {
             this.distFromSource = distFromSource;
         }
 
+        protected E getNode() {
+            return this.node;
+        }
+
         protected int getDistFromSource() {
             return this.distFromSource;
         }
@@ -24,7 +28,7 @@ public class DijkstraPath<E> implements Path<E> {
 
         @Override
         public int hashCode() {
-            return this.node.hashCode;
+            return this.node.hashCode();
         }
 
     }
@@ -43,6 +47,7 @@ public class DijkstraPath<E> implements Path<E> {
         }
     }
 
+
     private ArrayList<E> path;
     private Graph graph;
     
@@ -57,24 +62,51 @@ public class DijkstraPath<E> implements Path<E> {
 
     public void computePath(E from, E to) {
         
-        int[] d = new int[this.graph.size()];
-        E[] p = (E[]) new Object[this.graph.size()];
-        int[] k = new int[this.graph.size()];
-        PriorityQueue<QueueNode> q = new PriorityQueue<QueueNode>();
+        HashMap<E, Integer> d = new HashMap<E, Integer>();
+        HashMap<E, E> p = new HashMap<E, E>();
+        HashSet<E> k = new HashSet<E>();
+        PriorityQueue<QueueNode> q = new PriorityQueue<QueueNode>(new QueueNodeComparator());
 
         for (int i = 0; i < this.graph.size(); i++) {
-            d[i] = Integer.MAX_VALUE;
+            d.put(graph.getNodeList().get(i), Integer.MAX_VALUE);
         }
+        d.put(from, 0);
+        q.add(new QueueNode(from, 0));
+        
+        QueueNode v;
+        ArrayList<E> adj;
+        while (!q.isEmpty()) {
+            v = q.remove();
+            if (k.add(v.getNode())) {
+                adj = graph.getAdjecencyList(v.getNode());
+                for (int i = 0; i < adj.size(); i++) {
+                    if (!k.contains(adj.get(i)) && d.get(adj.get(i)) > d.get(v.getNode()) + graph.getWeightList().get(i)) {
+                        d.put(adj.get(i), d.get(v.getNode()) + graph.getWeightList().get(i));
+                        p.put(adj.get(i), v.getNode());
+                        q.add(new QueueNode(adj.get(i), d.get(adj.get(i))));
+                    }
+                }
+
+            }
+            
+        } // End of while
+
+        E u = from;
+        while (p.containsValue(u)) {
+            this.path.add(u);
+            u = p.get(from);
+        this.path.add(u);
+
 
 
     }
 
     public Iterator<E> getPath() {
-        return path.iterator();
+        return this.path.iterator();
     }
 
     public int getPathLength() {
-        
+        return this.path.size();
     }
     
 }
