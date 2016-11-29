@@ -43,7 +43,7 @@ public class Graph {
 			if(!(adjList.contains(other) && this == other)) {
 				adjList.add(other);
 				weightList.add(weight);
-				other.addAdjacency(this, weight);
+				other.addAdjxacency(this, weight);
 			} else {
 				System.out.println("addAdjanceny: Invalid node.");
 			}
