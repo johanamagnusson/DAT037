@@ -3,17 +3,30 @@ import java.util.*;
 
 public class DijkstraPath<E> implements Path<E> {
     
-    private class QueueNode extends Node {
+    private class QueueNode {
 
+        private E node;
         private int distFromSource;
         
         protected QueueNode(E node, int distFromSource) {
+            this.node = node;
             this.distFromSource = distFromSource;
         }
 
-            protected int getDistFromSource() {
+        protected int getDistFromSource() {
             return this.distFromSource;
         }
+
+        @Override
+        public boolean equals(Object obj) {
+            return this.node.equals(obj);
+        }
+
+        @Override
+        public int hashCode() {
+            return this.node.hashCode;
+        }
+
     }
 
     private class QueueNodeComparator implements Comparator<QueueNode> {
