@@ -1,70 +1,41 @@
 import Lab3Help.*;
 import java.util.*;
 
-public class Graph {
+public class Graph<T> {
 
-	private ArrayList<Node> nodeList;
+	private final Map<T, Node> graph;
 	
-    public Graph(String[] nodeNameArray, List<BLineTable> edgeTable) {
-		
-		for(int i=0; i<nodeNameArray.length; i++) {
-			nodeList.add(new Node(nodeNameArray[i]));
+	public Graph(T[] idArray, Edge[] edgeArray) {
+		graph = new HashMap<T, Node>(idArray.length);
+		for(T id : idArray) {
+			graph.put(id, new Node(id));
 		}
-
-		for(int i=0; i<edgeTable.size(); i++) {
-			BLineStop[] lineStops = edgeTable.get(i).getStops();
-			for(int j=0; i<lineStops.length-1; i++) {
-				getNode(lineStops[j].getName()).addAdjacency(getNode(lineStops[j+1].getName()),
-															 lineStops[j+1].getTime());
+		for(Edge e : edgeArray) {
+			if(!graph.get(e.v1).isAdj(e.v2)) {
+				graph.get(e.v1).addAdj(e.v2, e.weight);
+			}
+			if(!graph.get(e.v2).isAdj(e.v1)) {
+				graph.get(e.v2).addAdj(e.v1, e.weight);
 			}
 		}
 	}
 	
-	private Node getNode(String name) {
-		for(int i=0; i<nodeList.size(); i++) {
-			if(name == nodeList.get(i).getName()) {
-				return nodeList.get(i);
-			}
-		}
-		return null;
+	public int size() {
+		return graph.size();
 	}
 
-	private class Node {
-
-		private String nodeName;
-		private ArrayList<Node> adjList;
-		private ArrayList<Integer> weightList;
-
-		protected Node(String nodeName) {
-			this.nodeName = nodeName;
-		}
-		
-		protected void addAdjacency(Node other, int weight) {
-			if(!(adjList.contains(other) && this == other)) {
-				adjList.add(other);
-				weightList.add(weight);
-				other.addAdjxacency(this, weight);
-			} else {
-				System.out.println("addAdjanceny: Invalid node.");
-			}
-		}
-
-		protected String getName() {
-			return nodeName;
-		}
-
-		protected boolean isAdjacent(Node other) {
-			return adjList.contains(other);
-		}
-
-		protected int getWeight(Node other) {
-			return weightList.get(getAdjIndex(other));
-		}
-
-		private int getAdjIndex(Node other) {
-			return adjList.indexOf(other);
-		}
-
+	public T[] getNeighbours(T id) {
+		Set<T> neighbourSet = graph.keySet(id).getAdj();
+		return neighbourSet.toArray(new T[neighbourSet.size()])
 	}
 
+	public int getWeight(T id1, T id2) {
+		return graph.get(id1).getWeight(id2);
+	}
+
+	public T[] getIdArray() {
+		Set<T> idSet = graph.keySet();
+		return idSet.toArray(new T[idSet.size()]);
+	}
+	
 }

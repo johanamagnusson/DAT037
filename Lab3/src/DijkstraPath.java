@@ -13,38 +13,20 @@ public class DijkstraPath<E> implements Path<E> {
             this.distFromSource = distFromSource;
         }
 
-        protected E getNode() {
-            return this.node;
-        }
-
         protected int getDistFromSource() {
             return this.distFromSource;
         }
 
-        public int hashCode() {
-            return node.hashCode();
+        @Override
+        public boolean equals(Object obj) {
+            return this.node.equals(obj);
         }
 
         @Override
-        public boolean equals(final Object obj) {
-            if (this == obj)
-                return true;
-            if (obj == null)
-                return false;
-            if (getClass() != obj.getClass())
-                return false;
-            final QueueNode other = (QueueNode) obj;
-            if (this.node == null) {
-                if (other.getNode() != null) {
-                    return false;
-                }
-            } else if (!this.node.equals(other.getNode())) {
-                return false;
-            }
-            return true;
+        public int hashCode() {
+            return this.node.hashCode;
         }
 
-        
     }
 
     private class QueueNodeComparator implements Comparator<QueueNode> {
@@ -67,10 +49,10 @@ public class DijkstraPath<E> implements Path<E> {
     public DijkstraPath(List<BStop> nodeList, List<BLineTable> nodeLines) {
         path = new ArrayList<E>();
 	    String[] nodeNameArray = new String[nodeList.size()-1];
-		for(i=0; i<nodeList.size(); i++) {
-			nodeNameArray[i] = nodeList(i).getName();
+		for(int i = 0;  i< nodeList.size(); i++) {
+			nodeNameArray[i] = nodeList.get(i).getName();
 		}
-        graph = new Graph(nodeNameArray, BLineTable);
+        graph = new Graph(nodeNameArray, nodeLines);
     }
 
     public void computePath(E from, E to) {
