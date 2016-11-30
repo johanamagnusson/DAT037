@@ -3,7 +3,7 @@ import java.util.*;
 public class Node<T> {
 	
 	private final T id;
-	private final Map<Node, Integer> adjMap = new HashMap<>;
+	private final Map<Node, Integer> adjMap = new HashMap<>();
 	
 	public Node(T id) {
 		this.id = id;

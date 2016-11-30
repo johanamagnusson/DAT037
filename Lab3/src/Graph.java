@@ -26,7 +26,7 @@ public class Graph<T> {
 
 	public T[] getNeighbours(T id) {
 		Set<T> neighbourSet = graph.keySet(id).getAdj();
-		return neighbourSet.toArray(new T[neighbourSet.size()])
+		return neighbourSet.toArray(new T[neighbourSet.size()]);
 	}
 
 	public int getWeight(T id1, T id2) {

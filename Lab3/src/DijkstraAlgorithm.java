@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class DijkstrasAlgorithm<T> {
+public class Dijkstra<T> {
 
 	private class QNode {
 		
@@ -12,7 +12,7 @@ public class DijkstrasAlgorithm<T> {
 			this.id = id;
 			this.distance = distance;
 		}
-		
+
 		public T getId() {
 			return id;
 		}
@@ -70,7 +70,6 @@ public class DijkstrasAlgorithm<T> {
 		private QNode current;
 		private QNode neighbour;
 		private int alt;
-
 		while(!unvisitedQueue.isEmpty()) {
 
 			current = unvisitedQueue.remove();
@@ -81,7 +80,7 @@ public class DijkstrasAlgorithm<T> {
 				alt = current.getDist() + graph.getWeight(current.getName(), neighbour);
 
 				if(alt < neighbour.getDist()) {
-					QNode tmp = new another.neighbour;
+					QNode tmp = new QNode(neighbour.getId(), neighbour.get);
 					neighbour.setDist(alt);
 					neighbour.setPrev(current.getId);
 					unvisitedQueue.replace(tmp, neighbour);
