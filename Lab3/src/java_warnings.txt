@@ -1,0 +1,86 @@
+DijkstraPath.java:14: warning: [unchecked] unchecked cast
+		idArray = (E[])graph.getIdArray();
+		                               ^
+  required: E[]
+  found:    Object[]
+  where E is a type-variable:
+    E extends Object declared in class DijkstraPath
+DijkstraPath.java:40: warning: [unchecked] unchecked call to getNeighbours(E) as a member of the raw type Graph
+			for(E neighbourId : (E[])graph.getNeighbours(current.id)) {				
+			                                            ^
+  where E is a type-variable:
+    E extends Object declared in class Graph
+DijkstraPath.java:40: warning: [unchecked] unchecked cast
+			for(E neighbourId : (E[])graph.getNeighbours(current.id)) {				
+			                                            ^
+  required: E[]
+  found:    Object[]
+  where E is a type-variable:
+    E extends Object declared in class DijkstraPath
+DijkstraPath.java:42: warning: [unchecked] unchecked call to getWeight(E,E) as a member of the raw type Graph
+				alt = current.distance + graph.getWeight(current.id, neighbour.id);
+				                                        ^
+  where E is a type-variable:
+    E extends Object declared in class Graph
+Graph.java:11: warning: [unchecked] unchecked call to Graph.Node(E) as a member of the raw type Graph.Node
+			graph.put(id, new Node(id));
+			              ^
+  where E is a type-variable:
+    E extends Object declared in class Graph.Node
+Graph.java:14: warning: [unchecked] unchecked call to isAdj(E) as a member of the raw type Graph.Node
+			if(!graph.get(e.id1).isAdj(e.id2)) {
+			                          ^
+  where E is a type-variable:
+    E extends Object declared in class Graph.Node
+Graph.java:15: warning: [unchecked] unchecked call to addAdj(E,int) as a member of the raw type Graph.Node
+				graph.get(e.id1).addAdj(e.id2, e.weight);
+				                       ^
+  where E is a type-variable:
+    E extends Object declared in class Graph.Node
+Graph.java:17: warning: [unchecked] unchecked call to isAdj(E) as a member of the raw type Graph.Node
+			if(!graph.get(e.id2).isAdj(e.id1)) {
+			                          ^
+  where E is a type-variable:
+    E extends Object declared in class Graph.Node
+Graph.java:18: warning: [unchecked] unchecked call to addAdj(E,int) as a member of the raw type Graph.Node
+				graph.get(e.id2).addAdj(e.id1, e.weight);
+				                       ^
+  where E is a type-variable:
+    E extends Object declared in class Graph.Node
+Graph.java:28: warning: [unchecked] unchecked cast
+		return (E[])graph.get(id).getAdj();
+		                                ^
+  required: E[]
+  found:    Object[]
+  where E is a type-variable:
+    E extends Object declared in class Graph
+Graph.java:32: warning: [unchecked] unchecked call to getWeight(E) as a member of the raw type Graph.Node
+		return graph.get(id1).getWeight(id2);
+		                               ^
+  where E is a type-variable:
+    E extends Object declared in class Graph.Node
+Graph.java:37: warning: [unchecked] unchecked cast
+		return (E[])idSet.toArray(new Object[idSet.size()]);
+		                         ^
+  required: E[]
+  found:    Object[]
+  where E is a type-variable:
+    E extends Object declared in class Graph
+Graph.java:57: warning: [unchecked] unchecked cast
+			return (E[])adjSet.toArray(new Object[adjSet.size()]);
+			                          ^
+  required: E[]
+  found:    Object[]
+  where E is a type-variable:
+    E extends Object declared in class Graph.Node
+DijkstraStringPath.java:19: warning: [unchecked] unchecked call to Edge(T,T,int) as a member of the raw type Edge
+				edgeList.add(new Edge(tmpBLineStops[j].getName(),
+				             ^
+  where T is a type-variable:
+    T extends Object declared in class Edge
+DijkstraStringPath.java:24: warning: [unchecked] unchecked call to Graph(E[],Edge[]) as a member of the raw type Graph
+	    graph = new Graph(nodeNameArray, (Edge[])edgeList.toArray());
+	            ^
+  where E is a type-variable:
+    E extends Object declared in class Graph
+15 warnings
