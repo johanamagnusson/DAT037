@@ -57,7 +57,17 @@ public class DijkstraPath<E> implements Path<E> {
 		for(int i = 0;  i< nodeList.size(); i++) {
 			nodeNameArray[i] = nodeList.get(i).getName();
 		}
-        graph = new Graph(nodeNameArray, nodeLines);
+		ArrayList<Edge> edgeList;
+		BLineStop[] tmpBLineStops;
+		for(i=0; i < nodeLines.size(); i++) {
+			tmpBLineStops = nodeLines.get(i).getStops();
+			for(j=0; j < tmpBlineStops.length-1; j++) {
+				edgeArray.add(new Edge(tmpBLineStops[j].getName(),
+									   tmpBLineStops[j+1].getName(),
+									   tmpBLineStops[j+1].getTime()));
+			}
+		}
+		graph = new Graph(nodeNameArray, edgeList.toArray());
     }
 
     public void computePath(E from, E to) {
@@ -78,7 +88,7 @@ public class DijkstraPath<E> implements Path<E> {
         while (!q.isEmpty()) {
             v = q.remove();
             if (k.add(v.getNode())) {
-                adj = graph.getAdjecencyList(v.getNode());
+                adj = graph.getAdjacencyList(v.getNode());
                 for (int i = 0; i < adj.size(); i++) {
                     if (!k.contains(adj.get(i)) && d.get(adj.get(i)) > d.get(v.getNode()) + graph.getWeightList().get(i)) {
                         d.put(adj.get(i), d.get(v.getNode()) + graph.getWeightList().get(i));

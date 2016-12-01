@@ -1,39 +1,44 @@
-public class Node {
+import java.util.*;
+
+public class Node<T> {
 	
-	private String nodeName;
-	private ArrayList<Node> adjList;
-	private ArrayList<Integer> weightList;
+	private final T id;
+	private final Map<id, Integer> adjMap = new HashMap<>();
 	
-	public Node(String nodeName) {
-		this.nodeName = nodeName;
-	}
-	
-	public void addAdjacency(Node other, int weight) {
-		if(!(adjList.contains(other) && this == other)) {
-			adjList.add(other);
-			weightList.add(weight);
-			other.addAdjacency(this, weight);
-		} else {
-			System.out.println("addAdjanceny: Invalid node.");
-		}
-	}
-	
-	public String getName() {
-		return nodeName;
-	}
-	
-	public boolean isAdjacent(Node other) {
-		return adjList.contains(other);
-	}
-	
-	public int getWeight(Node other) {
-		return weightList.get(getAdjIndex(other));
-	}
-	
-	private int getAdjIndex(Node other) {
-		return adjList.indexOf(other);
+	public Node(T id) {
+		this.id = id;
 	}
 
+	public T getId() {
+		return id;
+	}
+
+	public void addAdj(T id, int weight) {
+		if(this.id != id) {
+			adjMap.put(id, weight);
+		}
+	}
+
+	public T[] getAdj() {
+		Set<T> adjSet = adjMap.keySet();
+		return adjSet.toArray(new T[adjSet.size()]);
+	}
+
+	public boolean isAdj(T other) {
+		return adjMap.containsKey(other);
+	}
+
+	public int getWeight(T other) {
+		return adjMap.get(other);
+	}
+	
+}
+
+    /*
+    public Map<Node, Integer> getAdjMap() {
+        return adjMap;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if(this==obj) {
@@ -46,11 +51,11 @@ public class Node {
 			return false;
 		}
 		Node other = (Node) obj;
-		if(this.name == null) {
-			if(other.getName() != null) {
+		if(this.id == null) {
+			if(other.getId() != null) {
 				return false;
 			}
-		} else if(!(this.name.equals(other.getName()))) {
+		} else if(!(this.id.equals(other.getId()))) {
 			return false;
 		}
 		return true;
@@ -58,11 +63,16 @@ public class Node {
 
 	@Override
 	public int hashCode() {
-		return this.name.hashCode();
+		return this.id.hashCode();
 	}
-	
-	@Override
-	public String toString() {
-		return name;
+
+	public void addAdjacency(Node other, int weight) {
+		if(!(adjList.contains(other) && this == other)) {
+			adjList.add(other);
+			weightList.add(weight);
+			other.addAdjacency(this, weight);
+		} else {
+			System.out.println("addAdjanceny: Invalid node.");
+		}
 	}
-}
+	*/
