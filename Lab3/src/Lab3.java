@@ -29,7 +29,9 @@ public class Lab3 {
         */
         Path<String> path = new DijsktraStringPath(nodeList, lineTable);
         path.computePath(startNode, stopNode);
+
               
     }
+
     
 }

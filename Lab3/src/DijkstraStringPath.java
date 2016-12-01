@@ -6,7 +6,7 @@ public class DijkstraStringPath implements Path<String> {
 
     private DijkstraPath<String> dPath;
 
-    public DijstraStringPath(List<BStop> nodeList, List<BLineTable> nodeLines) {
+    public DijkstraStringPath(List<BStop> nodeList, List<BLineTable> nodeLines) {
         this.dPath = new DijkstraPath<String>(nodeList, nodeLines);
     }
 

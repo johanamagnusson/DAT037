@@ -78,8 +78,9 @@ public class DijkstraPath<E> implements Path<E> {
         PriorityQueue<QueueNode> q = new PriorityQueue<QueueNode>(new QueueNodeComparator());
 
         for (int i = 0; i < this.graph.size(); i++) {
-            d.put(graph.getNodeList().get(i), Integer.MAX_VALUE);
+            d.put(graph.getIdArray()[i], Integer.MAX_VALUE);
         }
+        
         d.put(from, 0);
         q.add(new QueueNode(from, 0));
         
@@ -88,10 +89,10 @@ public class DijkstraPath<E> implements Path<E> {
         while (!q.isEmpty()) {
             v = q.remove();
             if (k.add(v.getNode())) {
-                adj = graph.getAdjacencyList(v.getNode());
+                adj = graph.getNeighbours(v.getNode());
                 for (int i = 0; i < adj.size(); i++) {
                     if (!k.contains(adj.get(i)) && d.get(adj.get(i)) > d.get(v.getNode()) + graph.getWeight(v.getNode(), adj.get(i))) {
-                        d.put(adj.get(i), d.get(v.getNode()) + graph.getWeight(v.getNode(), adj.get(i));
+                        d.put(adj.get(i), d.get(v.getNode()) + graph.getWeight(v.getNode(), adj.get(i)));
                         p.put(adj.get(i), v.getNode());
                         q.add(new QueueNode(adj.get(i), d.get(adj.get(i))));
                     }
@@ -107,7 +108,8 @@ public class DijkstraPath<E> implements Path<E> {
             u = p.get(from);
         this.path.add(u);
         }
-
+        Collections.reverse(this.path);
+        
     }
 
     public Iterator<E> getPath() {
