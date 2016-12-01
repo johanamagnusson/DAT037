@@ -27,9 +27,9 @@ public class Lab3 {
             System.out.println(nodeList.get(i).getName());
         }
         */
-
-		
-        
+        Path<String> path = new DijsktraStringPath(nodeList, lineTable);
+        path.computePath(startNode, stopNode);
+              
     }
     
 }
