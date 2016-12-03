@@ -23,6 +23,7 @@ public class Lab3 {
 		DijkstraStringPath path = new DijkstraStringPath(nodeList, lineTable);
 		path.computePath(startNode, stopNode);
 		System.out.println(path.getPathLength());
+		System.out.println(path.getPath());
 		
         /* DEBUG
         for(int i = 0; i < nodeList.size(); i++) {

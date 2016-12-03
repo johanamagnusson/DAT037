@@ -11,7 +11,7 @@ public class DijkstraPath<E> implements Path<E> {
 	
 	public DijkstraPath(Graph<E> graph) {
 		this.graph = graph;
-		idArray = (E[])graph.getIdArray();
+		idArray = graph.getIdArray();
 	}
 	
 	public void computePath(E from, E to) {

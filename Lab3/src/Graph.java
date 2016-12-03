@@ -3,41 +3,43 @@ import java.util.*;
 
 public class Graph<E> {
 
-	private final Map<E, Node> graph;
-	
+	private final Map<E, Node> nodeMap;
+
+	@SuppressWarnings("unchecked")	
 	public Graph(E[] idArray, Edge<E>[] edgeArray) {
-		graph = new HashMap<E, Node>(idArray.length);
+		nodeMap = new HashMap<E, Node>(idArray.length);
 		for(E id : idArray) {
-			graph.put(id, new Node<E>(id));
+			nodeMap.put(id, new Node(id));
 		}
 		for(Edge e : edgeArray) {
-			if(!graph.get(e.id1).isAdj(e.id2)) {
-				graph.get(e.id1).addAdj(e.id2, e.weight);
+			if(!nodeMap.get(e.id1).isAdj((E)e.id2)) {
+				nodeMap.get(e.id1).addAdj((E)e.id2, e.weight);
 			}
-			if(!graph.get(e.id2).isAdj(e.id1)) {
-				graph.get(e.id2).addAdj(e.id1, e.weight);
+			if(!nodeMap.get(e.id2).isAdj((E)e.id1)) {
+				nodeMap.get(e.id2).addAdj((E)e.id1, e.weight);
 			}
 		}
 	}
 	
 	public int size() {
-		return graph.size();
+		return nodeMap.size();
 	}
 
 	public E[] getNeighbours(E id) {
-		return (E[])graph.get(id).getAdj();
+		return nodeMap.get(id).getAdj();
 	}
 
 	public int getWeight(E id1, E id2) {
-		return graph.get(id1).getWeight(id2);
+		return nodeMap.get(id1).getWeight(id2);
 	}
 
+	@SuppressWarnings("unchecked")
 	public E[] getIdArray() {
-		Set<E> idSet = graph.keySet();
+		Set<E> idSet = nodeMap.keySet();
 		return (E[])idSet.toArray(new Object[idSet.size()]);
 	}
 
-	private class Node<E> {
+	private class Node {
 		
 		private final E id;
 		private final Map<E, Integer> adjMap = new HashMap<>();
@@ -52,6 +54,7 @@ public class Graph<E> {
 			}
 		}
 
+		@SuppressWarnings("unchecked")
 		public E[] getAdj() {
 			Set<E> adjSet = adjMap.keySet();
 			return (E[])adjSet.toArray(new Object[adjSet.size()]);

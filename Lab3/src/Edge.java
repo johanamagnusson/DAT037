@@ -8,5 +8,12 @@ public class Edge<E> {
 		this.id2 = id2;
 		this.weight = weight;
 	}
-	
+
+	public E getId1() {
+		return id1;
+	}
+
+	public E getId2() {
+		return id2;
+	}
 }
