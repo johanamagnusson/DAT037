@@ -27,11 +27,13 @@ public class Lab3 {
 		while(itr.hasNext()) {
 			System.out.println(itr.next());
 		}
-        /* DEBUG
-        for(int i = 0; i < nodeList.size(); i++) {
-            System.out.println(nodeList.get(i).getName());
-        }
-        */
+
+		new GUI(nodeList, lineTable, new DijkstraStringPath(nodeList, lineTable));
+        /*DEBUG: Print list of stop names
+		  for(int i = 0; i < nodeList.size(); i++) {
+		  System.out.println(nodeList.get(i).getName());
+		  }
+		*/
 
 		
         
