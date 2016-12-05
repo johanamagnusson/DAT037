@@ -16,36 +16,33 @@ public class DijkstraPath<E> implements Path<E> {
 	
 	public void computePath(E from, E to) {
 
-		PriorityQueue<QNode> unvisitedQueue = new PriorityQueue<QNode>(new QNodeComp());
-
 		QNode sourceNode = new QNode(from, 0);		
 		unvisitedQueue.add(sourceNode);
 	    qNodeMap.put(from, sourceNode);
 		for(int i=0; i<idArray.length; i++) {
 			if(idArray[i] != from) {
 				qNodeMap.put(idArray[i], new QNode(idArray[i], Integer.MAX_VALUE));
-				unvisitedQueue.add(qNodeMap.get(idArray[i]));
 			}
 		}
-		
+	    
+		PriorityQueue<QNode> unvisitedQueue = new PriorityQueue<QNode>(new QNodeComp());
+		HashSet<E> visitedNodes = new HashSet<E>();
 		QNode current;
 		QNode neighbour;
 		int alt;
+		unvisitedQueue.add(qNodeMap.get(from));
 		while(!unvisitedQueue.isEmpty()) {
 			current = unvisitedQueue.remove();
-			if(current.id == to) {
-				pathExists = true;
-				break;
-			}
-			for(E neighbourId : (E[])graph.getNeighbours(current.id)) {				
-				neighbour = qNodeMap.get(neighbourId);
-				alt = current.distance + graph.getWeight(current.id, neighbour.id);
-				if(alt < neighbour.distance) {
-					QNode tmp = new QNode(neighbour.id, neighbour.distance);
-					neighbour.distance = alt;
-					neighbour.prevId = current.id;
-					unvisitedQueue.replace(tmp, neighbour);
-				}		
+			if(visitedNodes.add(current.id)) {
+				for(E neighbourId : (E[])graph.getNeighbours(current.id)) {				
+					neighbour = qNodeMap.get(neighbourId);
+					alt = current.distance + graph.getWeight(current.id, neighbour.id);
+					if(alt < neighbour.distance && !visitedNodes.contains(neighbour)) {
+						neighbour.distance = alt;
+						neighbour.prevId = current.id;
+						unvisitedQueue.add(neighbour);
+					}		
+				}
 			}
 		}
 		E tmp = to;
@@ -56,7 +53,7 @@ public class DijkstraPath<E> implements Path<E> {
 				tmp = qNodeMap.get(tmp).prevId;
 			}
 		}
-		
+		Collections.reverse(path);
 	}
 	
 	public Iterator<E> getPath() {
