@@ -5,7 +5,8 @@ public class DijkstraStringPath implements Path<String> {
 
 	private DijkstraPath<String> dPath;
 	private Graph<String> graph;
-	
+
+	@SuppressWarnings("unchecked")
 	public DijkstraStringPath(List<BStop> nodeList, List<BLineTable> lineTable) {
 		String[] nodeNameArray = new String[nodeList.size()];
 		for(int i = 0; i<nodeList.size(); i++) {
@@ -21,7 +22,8 @@ public class DijkstraStringPath implements Path<String> {
 									   tmpBLineStops[j+1].getTime()));
 			}
 		}
-	    graph = new Graph<String>(nodeNameArray, edgeList.toArray(new Edge[edgeList.size()]));
+	    graph = new Graph<String>(nodeNameArray,
+								  (Edge<String>[])edgeList.toArray(new Edge[edgeList.size()]));
 		this.dPath = new DijkstraPath<String>(graph);
 	}
 
