@@ -1,11 +1,20 @@
-// Compile: javac -cp Lab3Help.jar Lab3.java
-// Run:     java -cp Lab3Help.jar:. Lab3
 import Lab3Help.*;
 import java.util.*;
 import java.io.*;
 
+/**
+ * The Lab3 class reads a list of nodes and a list of lines and computes the shortest path
+ * between two stops given in the input.
+ * @author Carl Smedstad, Andreas Magnusson
+ * @version 1.0 2016-12-05
+ */
 public class Lab3 {
-    
+
+	/**
+	 * Main method.
+	 * @param args input argument as follows: 
+     *             [stops-file] [line-file] [startnode] [targetnode]
+	 */
     public static void main(String[] args) throws IOException {
 
         Lab3File fileReader = new Lab3File();
@@ -27,16 +36,10 @@ public class Lab3 {
 		while(itr.hasNext()) {
 			System.out.println(itr.next());
 		}
-
 		new GUI(nodeList, lineTable, new DijkstraStringPath(nodeList, lineTable));
-        /*DEBUG: Print list of stop names
-		  for(int i = 0; i < nodeList.size(); i++) {
-		  System.out.println(nodeList.get(i).getName());
-		  }
-		*/
 
-		
-        
+		//DEBUG: Print list of stop names
+		//for(int i = 0; i < nodeList.size(); i++)
+		//	  System.out.println(nodeList.get(i).getName());   
     }
-    
 }
