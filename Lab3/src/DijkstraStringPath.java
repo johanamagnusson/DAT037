@@ -7,7 +7,7 @@ public class DijkstraStringPath implements Path<String> {
 	private Graph<String> graph;
 	
 	public DijkstraStringPath(List<BStop> nodeList, List<BLineTable> lineTable) {
-		String[] nodeNameArray = new String[nodeList.size()-1];
+		String[] nodeNameArray = new String[nodeList.size()];
 		for(int i = 0; i<nodeList.size(); i++) {
 			nodeNameArray[i] = nodeList.get(i).getName();
 		}
