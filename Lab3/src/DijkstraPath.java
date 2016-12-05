@@ -13,14 +13,6 @@ public class DijkstraPath<E> implements Path<E> {
             this.distFromSource = distFromSource;
         }
 
-        protected E getNode() {
-            return this.node;
-        }
-
-        protected int getDistFromSource() {
-            return this.distFromSource;
-        }
-
         @Override
         public boolean equals(Object obj) {
             return this.node.equals(obj);
@@ -37,9 +29,9 @@ public class DijkstraPath<E> implements Path<E> {
         
         @Override
         public int compare(QueueNode item1, QueueNode item2) {
-            if (item1.getDistFromSource() > item2.getDistFromSource()) {
+            if (item1.distFromSource > item2.distFromSource) {
                 return 1;
-            } else if (item1.getDistFromSource() == item2.getDistFromSource()) {
+            } else if (item1.distFromSource == item2.distFromSource) {
                 return 0;
             } else {
                 return -1;
@@ -88,14 +80,14 @@ public class DijkstraPath<E> implements Path<E> {
         ArrayList<E> adj;
         while (!q.isEmpty()) {
             v = q.remove();
-            if (k.add(v.getNode())) {
-                adj = graph.getNeighbours(v.getNode());
+            if (k.add(v.node)) {
+                adj = graph.getNeighbours(v.node);
                 for (int i = 0; i < adj.size(); i++) {
                     if (!k.contains(adj.get(i)) && d.get(adj.get(i)) >
-                            d.get(v.getNode()) + graph.getWeight(v.getNode(), adj.get(i))) {
-                        d.put(adj.get(i), d.get(v.getNode()) + 
-                                graph.getWeight(v.getNode(), adj.get(i)));
-                        p.put(adj.get(i), v.getNode());
+                            d.get(v.node) + graph.getWeight(v.node, adj.get(i))) {
+                        d.put(adj.get(i), d.get(v.node) + 
+                                graph.getWeight(v.node, adj.get(i)));
+                        p.put(adj.get(i), v.node);
                         q.add(new QueueNode(adj.get(i), d.get(adj.get(i))));
                     }
                 }
