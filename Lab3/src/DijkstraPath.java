@@ -91,8 +91,10 @@ public class DijkstraPath<E> implements Path<E> {
             if (k.add(v.getNode())) {
                 adj = graph.getNeighbours(v.getNode());
                 for (int i = 0; i < adj.size(); i++) {
-                    if (!k.contains(adj.get(i)) && d.get(adj.get(i)) > d.get(v.getNode()) + graph.getWeight(v.getNode(), adj.get(i))) {
-                        d.put(adj.get(i), d.get(v.getNode()) + graph.getWeight(v.getNode(), adj.get(i)));
+                    if (!k.contains(adj.get(i)) && d.get(adj.get(i)) >
+                            d.get(v.getNode()) + graph.getWeight(v.getNode(), adj.get(i))) {
+                        d.put(adj.get(i), d.get(v.getNode()) + 
+                                graph.getWeight(v.getNode(), adj.get(i)));
                         p.put(adj.get(i), v.getNode());
                         q.add(new QueueNode(adj.get(i), d.get(adj.get(i))));
                     }
