@@ -1,0 +1,19 @@
+Time complexity analysis of Dijkstra implementation:
+
+The data structures used in the Dijkstra algorithm are all made so the elements can be accessed in
+constant time. The distances and previous nodes are saved in objects of the type "QNode" and these
+QNodes are stored in a Hash Map. The set containing the already visited nodes (in the lecture notes
+ called "k") is saved using a Hash Set, making the elements accessible the same way as in a Hash
+Map. The priority queue used is the one authored by us in lab 2 which is implemented in a way such
+that the add and remove methods are done in logarithmic time.
+
+Walking through the algorithm, the Hash Map for the distances are created which has the size of
+the number of nodes and is done in linear time O(v), where v is the number of nodes. Next part of
+the algorithm which is significant for the time complexity is the while-loop. It removes an element
+from the priority queue which is done in O(log v) since the queue in the worst case can consist of
+all the nodes (e.g. if the source node is connected to all other nodes). Then comes a for-loop that
+iterates through all the neighbours of the current node. This can in worst case be all the edges
+of the graph and the time is therefore O(e), where e is the number of edges. Within the for-loop
+are a few computations and a comparison which are all done in constant time and finally an element
+is added to the queue which time is O(log v), so the total time complexity for the for-loop becomes
+O(e log v). Summing all this up we have O(v) + O(log v)
