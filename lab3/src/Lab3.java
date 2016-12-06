@@ -12,7 +12,7 @@ public class Lab3 {
 
     /**
      * Main method.
-     * @param args input argument as follows: 
+     * @param args input argument as follows:
      *             [stops-file] [line-file] [startnode] [targetnode]
      */
     public static void main(String[] args) throws IOException {
@@ -27,7 +27,7 @@ public class Lab3 {
             System.out.println("MalformedData exception.");
         }
         String startNode = args[2];
-        String stopNode = args[3];        
+        String stopNode = args[3];
 
         DijkstraStringPath path = new DijkstraStringPath(nodeList, lineTable);
         path.computePath(startNode, stopNode);
@@ -40,6 +40,6 @@ public class Lab3 {
 
         //DEBUG: Print list of stop names
         //for(int i = 0; i < nodeList.size(); i++)
-        //    System.out.println(nodeList.get(i).getName());   
+        //    System.out.println(nodeList.get(i).getName());
     }
 }

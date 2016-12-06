@@ -12,16 +12,16 @@ public class Graph<E> {
 
     /**
      * Constructor.
-     * @param idArray an array of node ID:s
-     * @param edgeArray an array of edge objects
+     * @param idList an array of node ID:s
+     * @param edgeList an array of edge objects
      */
-    @SuppressWarnings("unchecked")
-    public Graph(E[] idArray, Edge<E>[] edgeArray) {
-        nodeMap = new HashMap<E, Node>(idArray.length);
-        for(E id : idArray) {
+    //@SuppressWarnings("unchecked")
+    public Graph(List<E> idList, List<Edge<E>> edgeList) {
+        nodeMap = new HashMap<E, Node>(idList.size());
+        for(E id : idList) {
             nodeMap.put(id, new Node(id));
         }
-        for(Edge<E> e : edgeArray) {
+        for(Edge<E> e : edgeList) {
 			nodeMap.get(e.fromId).addAdj(e.toId, e.weight);
         }
     }
@@ -40,7 +40,7 @@ public class Graph<E> {
      * @param id node ID
      * @return an array of the node ID:s of the neighbours
      */
-    public E[] getNeighbours(E id) {
+    public ArrayList<E> getNeighbours(E id) {
         return nodeMap.get(id).getAdj();
     }
 
@@ -59,14 +59,15 @@ public class Graph<E> {
      * The getIdArray method returns an array of node ID:s of all the nodes in the graph.
      * @return an array of node ID:s of all the nodes in the graph
      */
-    @SuppressWarnings("unchecked")
-    public E[] getIdArray() {
-        Set<E> idSet = nodeMap.keySet();
-        return (E[])idSet.toArray(new Object[idSet.size()]);
+    //@SuppressWarnings("unchecked")
+    public ArrayList<E> getIdList() {
+        ArrayList<E> idList = new ArrayList<E>(nodeMap.keySet());
+        return idList;
     }
 
     /**
-     * The Node class is only used in the Graph class and stores an id and an adjacency list.
+     * The Node class is only used in the Graph class and stores an id and an adjacency
+     * list.
      */
     private class Node {
 
@@ -102,17 +103,17 @@ public class Graph<E> {
          * The getAdj returns an array of the ID:s of all the neighbour nodes.
          * @return an arrau of all the neighbour node ID:s.
          */
-        @SuppressWarnings("unchecked")
-        public E[] getAdj() {
-            Set<E> adjSet = adjMap.keySet();
-            return (E[])adjSet.toArray(new Object[adjSet.size()]);
+        //@SuppressWarnings("unchecked")
+        public ArrayList<E> getAdj() {
+            ArrayList<E> adjList = new ArrayList<E>(adjMap.keySet());
+            return adjList;
         }
 
         /**
          * The isAdj method checks if a node is in the adjacency list.
          * @param otherId the node to test
-         * @return <code>true</code> if the node is in the adjacency list, <code>false</code>
-         *         otherwise
+         * @return <code>true</code> if the node is in the adjacency list,
+         *         <code>false</code> otherwise
          */
         public boolean isAdj(E otherId) {
             return adjMap.containsKey(otherId);

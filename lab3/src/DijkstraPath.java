@@ -11,7 +11,7 @@ public class DijkstraPath<E> implements Path<E> {
 
     private Map<E, QNode> qNodeMap;
     private final Graph<E> graph;
-    private E[] idArray;
+    private ArrayList<E> idList;
     private ArrayList<E> path;
     private boolean pathExists = false;
 
@@ -21,7 +21,7 @@ public class DijkstraPath<E> implements Path<E> {
      */
     public DijkstraPath(Graph<E> graph) {
         this.graph = graph;
-        idArray = graph.getIdArray();
+        idList = graph.getIdList();
     }
 
     /**
@@ -35,16 +35,17 @@ public class DijkstraPath<E> implements Path<E> {
 		this.qNodeMap = new HashMap<E, QNode>();
         PriorityQueue<QNode> unvisitedQueue = new PriorityQueue<QNode>(new QNodeComp());
 
-        for(int i=0; i<idArray.length; i++) {
-            if(idArray[i] != from) {
-                qNodeMap.put(idArray[i], new QNode(idArray[i], Integer.MAX_VALUE));
+        for(int i=0; i<idList.size(); i++) {
+            if(!idList.get(i).equals(from)) {
+                qNodeMap.put(idList.get(i), new QNode(idList.get(i), Integer.MAX_VALUE));
             }
         }
         QNode sourceNode = new QNode(from, 0);
         unvisitedQueue.add(sourceNode);
         qNodeMap.put(from, sourceNode);
         //DEBUG: Prints sourceNode id and distance
-        //System.out.println(unvisitedQueue.peek().id + " " + unvisitedQueue.peek().distance);
+        //System.out.println(unvisitedQueue.peek().id + " " +
+        //                   unvisitedQueue.peek().distance);
 
         HashSet<E> visitedNodes = new HashSet<E>();
         QNode current;
@@ -106,10 +107,11 @@ public class DijkstraPath<E> implements Path<E> {
      */
     public int getPathLength() {
         if(pathExists) {
-			for(int i = 0; i < path.size(); i++) {
-			System.out.println(qNodeMap.get(path.get(i)).id + ": " + qNodeMap.get(path.get(i)).distance);
-			}
-
+            //DEBUG: Prints id and distance of all qNodes in path
+			//for(int i = 0; i < path.size(); i++) {
+            //    System.out.println(qNodeMap.get(path.get(i)).id + ": " +
+            //                       qNodeMap.get(path.get(i)).distance);
+			//}
             return qNodeMap.get(path.get(path.size()-1)).distance;
         } else {
             return Integer.MAX_VALUE;

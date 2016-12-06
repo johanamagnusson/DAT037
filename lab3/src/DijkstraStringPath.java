@@ -18,22 +18,22 @@ public class DijkstraStringPath implements Path<String> {
      * @param lineTable a list of BLineTable objects
      */
     @SuppressWarnings("unchecked")
-    public DijkstraStringPath(List<BStop> nodeList, List<BLineTable> lineTable) {
-        String[] nodeNameArray = new String[nodeList.size()];
-        for(int i = 0; i<nodeList.size(); i++) {
-            nodeNameArray[i] = nodeList.get(i).getName();
+    public DijkstraStringPath(List<BStop> stopList, List<BLineTable> lineTableList) {
+        ArrayList<String> nodeList = new ArrayList<String>(stopList.size());
+        for(BStop stop : stopList) {
+            nodeList.add(stop.getName());
         }
         ArrayList<Edge<String>> edgeList = new ArrayList<Edge<String>>();
-        BLineStop[] tmpBLineStops;
-        for(int i=0; i < lineTable.size(); i++) {
-            tmpBLineStops = lineTable.get(i).getStops();
-            for(int j=0; j < tmpBLineStops.length-1; j++) {
-                edgeList.add(new Edge<String>(tmpBLineStops[j].getName(),
-                                       tmpBLineStops[j+1].getName(),
-                                       tmpBLineStops[j+1].getTime()));
+        ArrayList<BLineStop> tmpBLineStops;
+        for(BLineTable lineTable : lineTableList) {
+            tmpBLineStops = new ArrayList<BLineStop>(Arrays.asList(lineTable.getStops()));
+            for(int i=0; i < tmpBLineStops.size()-1; i++) {
+                edgeList.add(new Edge<String>(tmpBLineStops.get(i).getName(),
+                                       tmpBLineStops.get(i+1).getName(),
+                                       tmpBLineStops.get(i+1).getTime()));
             }
         }
-        graph = new Graph<String>(nodeNameArray, (Edge<String>[])edgeList.toArray(new Edge[edgeList.size()]));
+        graph = new Graph<String>(nodeList, edgeList);
         this.dPath = new DijkstraPath<String>(graph);
     }
 
