@@ -1,3 +1,0 @@
-PriorityQueue: resort element, fixa hash på alla ställen
-Lite frågetecken om var vilken funktionalitet skall finnas:
-Ska allting om resort vara i PQ? Ska den istället vara i Lab2?
