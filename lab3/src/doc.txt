@@ -10,12 +10,22 @@ implemented in a way such that the add and remove methods are done in
 logarithmic time.
 
 Walking through the algorithm time complexity the first thing that needs to be
-considered is the while-loop. It removes an element from the priority queue
-which is done in O(log v) since the queue in the worst case can consist of
-all the nodes (e.g. if the source node is connected to all other nodes).
-Then comes a for-loop that iterates through all the neighbours of the current
-node. This can in worst case be all the edges of the graph and the time is
-therefore O(e), where e is the number of edges. Within the for-loop are a few
-computations and a comparison which are all done in constant time and finally an
-element is added to the queue which time is O(log v), so the total time
-complexity for the for-loop becomes O(e log v). 
+considered is the creation of the distance Hash Map, which takes O(v) time where
+v is the number of nodes. After comes the  while-loop which will run as long as
+the priority queue is not empty and since the number of elements that can go
+through the queue is dependent on the number of edges in the graph (every time a
+node is a neighbour to the current node it can be added to the queue), the time
+complexity becomes O(e), where e is the number of edges. The first operation 
+within the while-loop is a node being removed from the queue, which is done in
+logarithmic time and as stated earlier the maximum number of elements that can
+be in the queue is the number of edges, this is done in O(log e) time and so the
+total of the while-loop and this operation is O(e log e). Then comes a for-loop
+which is nested in an if-case that will only execute if the current node has not
+been visited before, and once entering the if-case all neighbours of the current
+node will be iterated over by the for-loop. However, only the nodes that has not
+previously been visited will be considered for addition to the queue meaning
+that the total nest while-if-for-if will consist of a total number of iterations
+of e. In this final if-case the node is added to the queue which is done in
+logarithmic time so the total time complexity for this part is O(e log e).
+Summing all the parts up we have O(v) + O(e log e) + O(e log e) =
+O(v + 2 e log e) = O(v + e log e^2) = O(v + e log v) since e <~ v^2.
