@@ -1,6 +1,0 @@
-### TODO ###
-*Finish public Node class as separate file, override hashcode and equals
-*Move data conversion to Dijkstra class
-*Rewrite QNode class
-*Implement PriorityQueue in Dijkstra
-*Implement graphics
