@@ -1,2 +1,2 @@
-# dslabs
-Laborations for the data structures course
+# DAT037
+Laborations for course in Datastructures
