@@ -1,8 +1,8 @@
 import Lab3Help.*;
 import java.util.*;
 
-/** 
- * The DijkstraStringPath is a wrapper class for the generic DijkstraPath class that 
+/**
+ * The DijkstraStringPath is a wrapper class for the generic DijkstraPath class that
  * to is of the type String.
  * @author Carl Smedstad, Andreas Magnusson
  * @version 1.0 2016-12-05
@@ -23,7 +23,7 @@ public class DijkstraStringPath implements Path<String> {
         for(int i = 0; i<nodeList.size(); i++) {
             nodeNameArray[i] = nodeList.get(i).getName();
         }
-        ArrayList<Edge> edgeList = new ArrayList<Edge>();
+        ArrayList<Edge<String>> edgeList = new ArrayList<Edge<String>>();
         BLineStop[] tmpBLineStops;
         for(int i=0; i < lineTable.size(); i++) {
             tmpBLineStops = lineTable.get(i).getStops();

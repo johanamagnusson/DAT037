@@ -15,18 +15,15 @@ public class Graph<E> {
      * @param idArray an array of node ID:s
      * @param edgeArray an array of edge objects
      */
-    @SuppressWarnings("unchecked")  
+    @SuppressWarnings("unchecked")
     public Graph(E[] idArray, Edge<E>[] edgeArray) {
         nodeMap = new HashMap<E, Node>(idArray.length);
         for(E id : idArray) {
             nodeMap.put(id, new Node(id));
         }
-        for(Edge e : edgeArray) {
-            if(!nodeMap.get(e.id1).isAdj((E)e.id2)) {
-                nodeMap.get(e.id1).addAdj((E)e.id2, e.weight);
-            }
-            if(!nodeMap.get(e.id2).isAdj((E)e.id1)) {
-                nodeMap.get(e.id2).addAdj((E)e.id1, e.weight);
+        for(Edge<E> e : edgeArray) {
+            if(!nodeMap.get(e.fromId).isAdj(e.toId)) {
+                nodeMap.get(e.fromId).addAdj(e.toId, e.weight);
             }
         }
     }
@@ -41,7 +38,7 @@ public class Graph<E> {
 
     /**
      * The getNeighbours method returns an array of the neighbour-node ID:s of the
-     * node given in the input. 
+     * node given in the input.
      * @param id node ID
      * @return an array of the node ID:s of the neighbours
      */
@@ -52,12 +49,12 @@ public class Graph<E> {
     /**
      * The getWeight method returns the weight of the edge between the two given
      * nodes.
-     * @param id1 node ID of first node
-     * @param id2 node ID of second node
+     * @param fromId node ID of first node
+     * @param toId node ID of second node
      * @return the weight of the edge between the nodes
      */
-    public int getWeight(E id1, E id2) {
-        return nodeMap.get(id1).getWeight(id2);
+    public int getWeight(E fromId, E toId) {
+        return nodeMap.get(fromId).getWeight(toId);
     }
 
     /**
@@ -74,7 +71,7 @@ public class Graph<E> {
      * The Node class is only used in the Graph class and stores an id and an adjacency list.
      */
     private class Node {
-        
+
         private final E id;
         private final Map<E, Integer> adjMap = new HashMap<>();
 
@@ -119,14 +116,12 @@ public class Graph<E> {
 
         /**
          * The getWeight method returns the weight of the edge between this node and the
-         * one given in the input. 
+         * one given in the input.
          * @param otherId the ID of the other node
          * @return the weight of the edge between the nodes
          */
         public int getWeight(E otherId) {
             return adjMap.get(otherId);
         }
-        
     }
-        
 }

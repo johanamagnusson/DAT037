@@ -8,7 +8,7 @@ import Lab3Help.*;
  * @version 1.0 2016-12-05
  */
 public class DijkstraPath<E> implements Path<E> {
-    
+
     private Map<E, QNode> qNodeMap = new HashMap<E, QNode>();
     private final Graph<E> graph;
     private E[] idArray;
@@ -25,7 +25,7 @@ public class DijkstraPath<E> implements Path<E> {
     }
 
     /**
-     * The computePath method preforms the Dijkstra algorithm between the nodes 
+     * The computePath method preforms the Dijkstra algorithm between the nodes
      * given in the input.
      * @param from starting node
      * @param to target node
@@ -38,12 +38,12 @@ public class DijkstraPath<E> implements Path<E> {
                 qNodeMap.put(idArray[i], new QNode(idArray[i], Integer.MAX_VALUE));
             }
         }
-        QNode sourceNode = new QNode(from, 0);      
+        QNode sourceNode = new QNode(from, 0);
         unvisitedQueue.add(sourceNode);
         qNodeMap.put(from, sourceNode);
         //DEBUG: Prints sourceNode id and distance
         //System.out.println(unvisitedQueue.peek().id + " " + unvisitedQueue.peek().distance);
-        
+
         HashSet<E> visitedNodes = new HashSet<E>();
         QNode current;
         QNode neighbour;
@@ -56,7 +56,7 @@ public class DijkstraPath<E> implements Path<E> {
                 //System.out.println(current.id);
             }
             if(visitedNodes.add(current.id)) {
-                for(E neighbourId : (E[])graph.getNeighbours(current.id)) {
+                for(E neighbourId : graph.getNeighbours(current.id)) {
                     neighbour = qNodeMap.get(neighbourId);
                     alt = current.distance + graph.getWeight(current.id, neighbour.id);
                     if(alt < neighbour.distance && !visitedNodes.contains(neighbour)) {
@@ -65,15 +65,20 @@ public class DijkstraPath<E> implements Path<E> {
                         unvisitedQueue.add(neighbour);
                         //DEBUG: Prints current and neighbour id:s if distance is compared
                         //System.out.println(current.id + " : " + neighbourId);
-                    }       
+                    }
                 }
             }
         }
         E tmp = to;
         path.add(to);
+		//DEBUG: Prints to en from before while-loop
+		//System.out.println("Pre-while to: " + to);
+		//System.out.println("Pre-while from: " + from);
         if(pathExists) {
-            while(tmp != from) {
-                path.add(qNodeMap.get(tmp).prevId);
+            while(!tmp.equals(from)) {
+				//DEBUG: Prints tmp in while-loop
+				//System.out.println("In-while tmp: " + tmp);
+				path.add(qNodeMap.get(tmp).prevId);
                 tmp = qNodeMap.get(tmp).prevId;
             }
         }
@@ -109,7 +114,7 @@ public class DijkstraPath<E> implements Path<E> {
      * the starting node and the ID of the neighbour closests to the source.
      */
     private class QNode {
-        
+
         private final E id;
         private int distance;
         private E prevId;
@@ -123,7 +128,7 @@ public class DijkstraPath<E> implements Path<E> {
             this.id = id;
             this.distance = distance;
         }
-        
+
     }
 
     /**
@@ -145,5 +150,4 @@ public class DijkstraPath<E> implements Path<E> {
             }
         }
     }
-    
 }
