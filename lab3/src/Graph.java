@@ -22,9 +22,7 @@ public class Graph<E> {
             nodeMap.put(id, new Node(id));
         }
         for(Edge<E> e : edgeArray) {
-            if(!nodeMap.get(e.fromId).isAdj(e.toId)) {
-                nodeMap.get(e.fromId).addAdj(e.toId, e.weight);
-            }
+			nodeMap.get(e.fromId).addAdj(e.toId, e.weight);
         }
     }
 
@@ -89,8 +87,14 @@ public class Graph<E> {
          * @param weight the weight of the edge
          */
         public void addAdj(E id, int weight) {
-            if(this.id != id) {
-                adjMap.put(id, weight);
+            if(!this.id.equals(id)) {
+				if(adjMap.containsKey(id)) {
+					if(adjMap.get(id) > weight) {
+						adjMap.put(id, weight);
+					}
+				} else {
+					adjMap.put(id, weight);
+				}
             }
         }
 

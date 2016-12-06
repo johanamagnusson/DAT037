@@ -33,13 +33,12 @@ public class DijkstraStringPath implements Path<String> {
                                        tmpBLineStops[j+1].getTime()));
             }
         }
-        graph = new Graph<String>(nodeNameArray,
-                                  (Edge<String>[])edgeList.toArray(new Edge[edgeList.size()]));
+        graph = new Graph<String>(nodeNameArray, (Edge<String>[])edgeList.toArray(new Edge[edgeList.size()]));
         this.dPath = new DijkstraPath<String>(graph);
     }
 
     /**
-     * The computePath method calls the computePath method in DijkstraPath to calculate 
+     * The computePath method calls the computePath method in DijkstraPath to calculate
      * the shortest path between the nodes given in the input.
      * @param from starting node
      * @param to target node
@@ -49,7 +48,7 @@ public class DijkstraStringPath implements Path<String> {
     }
 
     /**
-     * The getPath method uses the getPath method in DijkstraPath to get an iterator of 
+     * The getPath method uses the getPath method in DijkstraPath to get an iterator of
      * the path.
      * @return an iterator of the path
      */

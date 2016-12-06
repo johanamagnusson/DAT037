@@ -9,10 +9,10 @@ import Lab3Help.*;
  */
 public class DijkstraPath<E> implements Path<E> {
 
-    private Map<E, QNode> qNodeMap = new HashMap<E, QNode>();
+    private Map<E, QNode> qNodeMap;
     private final Graph<E> graph;
     private E[] idArray;
-    private ArrayList<E> path = new ArrayList<E>();
+    private ArrayList<E> path;
     private boolean pathExists = false;
 
     /**
@@ -32,7 +32,9 @@ public class DijkstraPath<E> implements Path<E> {
      */
     public void computePath(E from, E to) {
 
+		this.qNodeMap = new HashMap<E, QNode>();
         PriorityQueue<QNode> unvisitedQueue = new PriorityQueue<QNode>(new QNodeComp());
+
         for(int i=0; i<idArray.length; i++) {
             if(idArray[i] != from) {
                 qNodeMap.put(idArray[i], new QNode(idArray[i], Integer.MAX_VALUE));
@@ -69,8 +71,9 @@ public class DijkstraPath<E> implements Path<E> {
                 }
             }
         }
+		this.path = new ArrayList<E>();
         E tmp = to;
-        path.add(to);
+        this.path.add(to);
 		//DEBUG: Prints to en from before while-loop
 		//System.out.println("Pre-while to: " + to);
 		//System.out.println("Pre-while from: " + from);
@@ -103,6 +106,10 @@ public class DijkstraPath<E> implements Path<E> {
      */
     public int getPathLength() {
         if(pathExists) {
+			for(int i = 0; i < path.size(); i++) {
+			System.out.println(qNodeMap.get(path.get(i)).id + ": " + qNodeMap.get(path.get(i)).distance);
+			}
+
             return qNodeMap.get(path.get(path.size()-1)).distance;
         } else {
             return Integer.MAX_VALUE;
