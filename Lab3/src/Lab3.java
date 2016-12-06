@@ -10,11 +10,11 @@ import java.io.*;
  */
 public class Lab3 {
 
-	/**
-	 * Main method.
-	 * @param args input argument as follows: 
+    /**
+     * Main method.
+     * @param args input argument as follows: 
      *             [stops-file] [line-file] [startnode] [targetnode]
-	 */
+     */
     public static void main(String[] args) throws IOException {
 
         Lab3File fileReader = new Lab3File();
@@ -29,17 +29,17 @@ public class Lab3 {
         String startNode = args[2];
         String stopNode = args[3];        
 
-		DijkstraStringPath path = new DijkstraStringPath(nodeList, lineTable);
-		path.computePath(startNode, stopNode);
-		System.out.println(path.getPathLength());
-		Iterator<String> itr = path.getPath();
-		while(itr.hasNext()) {
-			System.out.println(itr.next());
-		}
-		new GUI(nodeList, lineTable, new DijkstraStringPath(nodeList, lineTable));
+        DijkstraStringPath path = new DijkstraStringPath(nodeList, lineTable);
+        path.computePath(startNode, stopNode);
+        System.out.println(path.getPathLength());
+        Iterator<String> itr = path.getPath();
+        while(itr.hasNext()) {
+            System.out.println(itr.next());
+        }
+        new GUI(nodeList, lineTable, new DijkstraStringPath(nodeList, lineTable));
 
-		//DEBUG: Print list of stop names
-		//for(int i = 0; i < nodeList.size(); i++)
-		//	  System.out.println(nodeList.get(i).getName());   
+        //DEBUG: Print list of stop names
+        //for(int i = 0; i < nodeList.size(); i++)
+        //    System.out.println(nodeList.get(i).getName());   
     }
 }
